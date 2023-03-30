@@ -1,10 +1,14 @@
-import { View, Text } from "react-native";
+import { View, Text} from "react-native";
 
-const Config = () =>  {
+const Config = (navigation) =>  {
 
-    <View>
-        <Text>oi</Text>
-    </View>
+    return(
+        <View>
+            <Text>Configurações</Text>
+        
+        </View>
+    )
+   
 }
 
 export default Config;

@@ -106,7 +106,7 @@ export default function Login({ navigation }) {
             onChangeText={setEmail}
             style={{
               width: 300,
-              height:50
+              height:50,
             }}
           />
         </View>
@@ -147,11 +147,10 @@ export default function Login({ navigation }) {
               flexDirection: "row",
           }}
            onPress={() => navigation.navigate("Register")}>
-            <Text style={{color: "#fffafa", marginTop:5, fontSize:16}}>Cadastrar</Text>
+            <Text style={{color: "#fffafa", marginTop:5, fontSize:16}}>Cadastra-se</Text>
           </TouchableOpacity>
           </View>
         </View>
-      
       </View>
     </View>
   );
