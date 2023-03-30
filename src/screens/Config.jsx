@@ -1,8 +1,10 @@
 import { View, Text } from "react-native";
 
-export const Config = () =>  {
+const Config = () =>  {
 
     <View>
         <Text>oi</Text>
     </View>
 }
+
+export default Config;
