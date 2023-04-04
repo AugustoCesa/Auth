@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Button, HelperText, Paragraph, TextInput } from "react-native-paper";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";

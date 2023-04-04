@@ -4,10 +4,12 @@ const HomeScreen = () => {
 return(
     <View style={{
         backgroundColor:"#000000",
-        maxHeight: 1000,
-        minHeight: 300,
+        maxHeight: 2000,
+        minHeight: 1000,
         }} >
-        <Text>oi</Text>
+        <Text style={{
+            color: "#ffffff",
+        }}>oi</Text>
     </View>
     )
 }
