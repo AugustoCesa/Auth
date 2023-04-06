@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { Button, HelperText, Paragraph, TextInput } from "react-native-paper";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
+import { useEffect } from "react";
 
 /**
  * Componente de Login do usuário
@@ -19,6 +20,26 @@ export default function Login({ navigation }) {
   const [passwordVisible, setPasswordVisible] = useState(true);
   // Variável responsável por mostrar ou não o erro do usuário
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    checkIfUserAlreadyLogged();
+  }, []);
+
+  function checkIfUserAlreadyLogged() {
+    // Verifica se o usuário já está logado
+    // esta função retorna uma Promise
+    // foi importada do firebase/auth
+    // note que auth é o primeiro parâmetro
+    onAuthStateChanged(auth, (user) => {
+      // caso a Promise seja resolvida, o usuário é logado
+      if (user) {
+        console.log("Usuário já está logado");
+        navigation.navigate("Drawer");
+      } else {
+        console.log("Usuário não está logado");
+      }
+    });
+  }
 
   /**
    * Função responsável por fazer o login do usuário
@@ -74,6 +95,8 @@ export default function Login({ navigation }) {
         style={{
           marginTop: 100,
           marginBottom: 40,
+          height: 100,
+          width: 100,
         }}
         source={require("../../assets/caixa1.png")}
       />
@@ -105,7 +128,7 @@ export default function Login({ navigation }) {
             onChangeText={setEmail}
             style={{
               width: 300,
-              height:50,
+              height: 50,
             }}
           />
         </View>
@@ -128,7 +151,7 @@ export default function Login({ navigation }) {
           }
           style={{
             width: 300,
-            height:50,
+            height: 50,
             marginBottom: 10,
           }}
         />
@@ -138,16 +161,26 @@ export default function Login({ navigation }) {
           <Button mode="contained" onPress={handleRegister}>
             Login
           </Button>
-          <View style={{ flexDirection: "column", alignItems:"center", marginTop: 10 }}>
-          <Text style={{ color: "#fffafa", fontSize: 16 }}>
-            Não possui uma conta?{" "}
-          </Text>
-          <TouchableOpacity style={{
-              flexDirection: "row",
-          }}
-           onPress={() => navigation.navigate("Register")}>
-            <Text style={{color: "#fffafa", marginTop:5, fontSize:16}}>Cadastra-se</Text>
-          </TouchableOpacity>
+          <View
+            style={{
+              flexDirection: "column",
+              alignItems: "center",
+              marginTop: 10,
+            }}
+          >
+            <Text style={{ color: "#fffafa", fontSize: 16 }}>
+              Não possui uma conta?{" "}
+            </Text>
+            <TouchableOpacity
+              style={{
+                flexDirection: "row",
+              }}
+              onPress={() => navigation.navigate("Register")}
+            >
+              <Text style={{ color: "#fffafa", marginTop: 5, fontSize: 16 }}>
+                Cadastra-se
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>

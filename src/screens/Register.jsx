@@ -2,60 +2,78 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { View, Image } from "react-native";
 import { Button, HelperText, Paragraph, TextInput } from "react-native-paper";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { auth } from "../config/firebase";
+import { auth, db } from "../config/firebase";
+import { addDoc, collection } from "firebase/firestore";
 
-export default function Register(navigation) {
+export default function Register({ navigation }) { // fix: add {} to destructure navigation
+  const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(true);
   const [error, setError] = useState("");
 
-  function handleRegister() {
+  async function handleRegister() {
     console.log("Registrando usuário");
     if (checkIfPasswordsMatch()) {
       console.log("As senhas coincidem");
     } else {
       console.log("As senhas não coincidem");
     }
-    if (checkPasswordLenght()) {
+    if (checkPasswordLength()) {
       console.log("As senhas são grandonas");
     } else {
       console.log("As senhas são muito pequenas");
     }
 
-    createUserWithEmailAndPassword(auth, email, senha)
-      .then((userCredential) => {
-        console.log(userCredential, "Usuário registrado com sucesso");
-        navigation.navigate("Login");
-      })
-      .catch((error) => {
-        setError(error.message); // mostra a mensagem original do Firebase
-        const errorCode = error.code; // obtém o código de erro do Firebase
-        switch (
-        errorCode // verifica qual é o código de erro
-        ) {
-          case "auth/email-already-in-use":
-            setError("Esse email já está em uso por outro usuário."); // mostra uma mensagem humanizada
-            break;
-          case "auth/invalid-email":
-            setError("Esse email não é válido.");
-            break;
-          case "auth/weak-password":
-            setError("Essa senha é muito fraca.");
-            break;
-          default:
-            setError("Ocorreu um erro ao registrar o usuário.");
-        }
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        senha
+      );
+      console.log(userCredential, "Usuário registrado com sucesso");
+      addUsuario(userCredential.user.uid); // pass the user ID to addUsuario
+      navigation.navigate("Login");
+    } catch (error) {
+      setError(error.message);
+      const errorCode = error.code;
+      switch (errorCode) {
+        case "auth/email-already-in-use":
+          setError("Esse email já está em uso por outro usuário."); // mostra uma mensagem humanizada
+          break;
+        case "auth/invalid-email":
+          setError("Esse email não é válido.");
+          break;
+        case "auth/weak-password":
+          setError("Essa senha é muito fraca.");
+          break;
+        default:
+          setError("Ocorreu um erro ao registrar o usuário.");
+      }
+    }
+  }
+
+  async function addUsuario(uid) { // pass the user ID as a parameter
+    try {
+      const docRef = await addDoc(collection(db, "usuarios"), {
+        nome: nome,
+        email: email,
+        senha: senha,
+        uid: uid, // add the user ID to the document
       });
+      console.log("Id do usuário: ", docRef.id);
+      setNome("");
+    } catch (error) {
+      console.error("Erro ao adicionar usuário ao Firestore:", error);
+    }
   }
 
   function checkIfPasswordsMatch() {
     return senha === confirmarSenha;
   }
 
-  function checkPasswordLenght() {
+  function checkPasswordLength() {
     return senha.length >= 6;
   }
 
@@ -91,6 +109,24 @@ export default function Register(navigation) {
          style={{
           color: "#fffafa",
           fontSize: 16,
+        }}>Nome</Paragraph>
+        <TextInput
+          mode="outlined"
+          placeholder="Digite seu Nome"
+          value={nome}
+          onChangeText={setNome}
+          style={{
+            width: 300,
+            height:50
+          }}
+        />
+      </View>
+
+      <View>
+        <Paragraph
+         style={{
+          color: "#fffafa",
+          fontSize: 16,
         }}>E-mail</Paragraph>
         <TextInput
           mode="outlined"
@@ -103,6 +139,7 @@ export default function Register(navigation) {
           }}
         />
       </View>
+
       <View style={{ marginTop: 10 }}>
         <Paragraph
          style={{

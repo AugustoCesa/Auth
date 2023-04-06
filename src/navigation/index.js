@@ -7,7 +7,6 @@ import Login from "../screens/Login";
 import Register from "../screens/Register";
 import Config from "../screens/Config";
 import CadEmpresa from "../screens/CadEmpresa";
-import RickScreen from "../screens/RickScreen";
 
 const Stack = createNativeStackNavigator();
 export const RootNavigation = () => {
@@ -31,7 +30,6 @@ export const RootNavigation = () => {
           }}
         />
        
-
         <Stack.Screen name={"Drawer"} component={MyDrawer} />
       </Stack.Navigator>
     </NavigationContainer>
@@ -101,20 +99,7 @@ function MyDrawer() {
           },
         }}
       />
-      <Drawer.Screen
-        name="Banco"
-        component={RickScreen}
-        options={{
-          title: "Banco",
-          headerStyle: {
-            backgroundColor: "#5f1985",
-          },
-          headerTintColor: "#fff",
-          headerTitleStyle: {
-            fontWeight: "bold",
-          },
-        }}
-      />
+     
     </Drawer.Navigator>
   );
 }
