@@ -84,10 +84,8 @@ export default function Login({ navigation }) {
     <View
       style={{
         backgroundColor: "#5f1985",
-        minHeight: 1200,
-        maxHeight: 1800,
-        minWidth: 300,
-        maxWidth: 1000,
+        minHeight: "100%",
+        minWidth: "100%",
         alignItems: "center",
       }}
     >
@@ -122,6 +120,7 @@ export default function Login({ navigation }) {
         </Paragraph>
         <View>
           <TextInput
+            testID="Email"
             mode="outlined"
             placeholder="Digite seu e-mail"
             value={email}
@@ -136,6 +135,7 @@ export default function Login({ navigation }) {
       <View>
         <Paragraph style={{ color: "#fffafa", fontSize: 16 }}>Senha</Paragraph>
         <TextInput
+          testID="Senha"
           mode="outlined"
           placeholder="Digite sua Senha"
           value={senha}

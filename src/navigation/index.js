@@ -6,10 +6,12 @@ import HomeScreen from "../screens/Home";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
 import Config from "../screens/Config";
+import Empresa from "../screens/Empresa";
 import CadEmpresa from "../screens/CadEmpresa";
 
 const Stack = createNativeStackNavigator();
 export const RootNavigation = () => {
+
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -29,7 +31,16 @@ export const RootNavigation = () => {
             title: "Registro",
           }}
         />
-       
+
+<Stack.Screen
+          name="CadEmpresa"
+          component={CadEmpresa}
+          options={{
+            headerShown: false,
+            title: "CadEmpresa",
+          }}
+        />
+
         <Stack.Screen name={"Drawer"} component={MyDrawer} />
       </Stack.Navigator>
     </NavigationContainer>
@@ -69,10 +80,10 @@ function MyDrawer() {
           },
         }}
       />
-
+  
       <Drawer.Screen
-        name="Cadastro de Empresa"
-        component={CadEmpresa}
+        name="Empresa"
+        component={Empresa}
         options={{
           headershown: false,
           headerStyle: {
@@ -99,7 +110,6 @@ function MyDrawer() {
           },
         }}
       />
-     
     </Drawer.Navigator>
   );
 }

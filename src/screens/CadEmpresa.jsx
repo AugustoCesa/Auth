@@ -1,5 +1,5 @@
-import { View } from "react-native";
-import { Button, Text, TextInput } from "react-native-paper";
+import { View, Image } from "react-native";
+import { Button, Paragraph, TextInput } from "react-native-paper";
 import { useState } from "react";
 import {
   addDoc,
@@ -12,7 +12,7 @@ import {
 import { app, auth } from "../config/firebase";
 import { storeData } from "../utils/asyncUtils";
 
-export default function UsuarioCadastro({ navigation }) {
+export default function CadEmpresa({ navigation }) {
   const [nomeFantasia, setNomeFantasia] = useState("");
   const [RazaoSocial, setRazaoSocial] = useState("");
   const [logradouro, setLogradouro] = useState("");
@@ -37,7 +37,7 @@ export default function UsuarioCadastro({ navigation }) {
         RazaoSocial: RazaoSocial,
         Logradouro: logradouro,
         CNPJ: cnpj,
-        UsuaruoId: auth.currentUser.uid, // Adiciona o id do usuário autor
+        UsuarioId: auth.currentUser.uid, // Adiciona o id do usuário autor
       }
     ).then((docRef) => {
       console.log("Id da empresa: ", docRef.id);
@@ -47,28 +47,114 @@ export default function UsuarioCadastro({ navigation }) {
   }
 
   return (
-    <View>
-      <TextInput
-        label="Nome Fantasia"
-        value={nomeFantasia}
-        onChangeText={(text) => setNomeFantasia(text)}
+    <View
+      style={{
+        backgroundColor: "#5f1985",
+        flex: 1,
+        alignItems: "center",
+      }}
+    >
+      <Image
+        style={{
+          marginTop: 100,
+          marginBottom: 40,
+          height: 100,
+          width: 100,
+        }}
+        source={require("../../assets/caixa1.png")}
       />
-      <TextInput
-        label="Razão Social"
-        value={RazaoSocial}
-        onChangeText={(text) => setRazaoSocial(text)}
-      />
-      <TextInput
-        label="Logradouro"
-        value={logradouro}
-        onChangeText={(text) => setLogradouro(text)}
-      />
-      <TextInput
-        label="CNPJ"
-        value={cnpj}
-        onChangeText={(text) => setCnpj(text)}
-      />
-      <Button onPress={handleRegister}>Cadastrar</Button>
+
+      <View>
+        <Paragraph
+          style={{
+            color: "#fffafa",
+            fontSize: 16,
+          }}
+        >
+          {" "}
+          Nome Fantasia{" "}
+        </Paragraph>
+        <TextInput
+          label="Nome Fantasia"
+          value={nomeFantasia}
+          onChangeText={(text) => setNomeFantasia(text)}
+          style={{
+            width: 300,
+            height: 50,
+          }}
+        />
+      </View>
+
+      <View>
+        <Paragraph
+          style={{
+            color: "#fffafa",
+            fontSize: 16,
+          }}
+        >
+          {" "}
+          Razao Social{" "}
+        </Paragraph>
+        <TextInput
+          label="Razão Social"
+          value={RazaoSocial}
+          onChangeText={(text) => setRazaoSocial(text)}
+          style={{
+            width: 300,
+            height: 50,
+          }}
+        />
+      </View>
+
+      <View>
+        <Paragraph
+          style={{
+            color: "#fffafa",
+            fontSize: 16,
+          }}
+        >
+          Logradouro{" "}
+        </Paragraph>
+        <TextInput
+          label="Logradouro"
+          value={logradouro}
+          onChangeText={(text) => setLogradouro(text)}
+          style={{
+            width: 300,
+            height: 50,
+          }}
+        />
+      </View>
+
+      <View>
+        <Paragraph
+          style={{
+            color: "#fffafa",
+            fontSize: 16,
+          }}
+        >
+          {" "}
+          CNPJ
+        </Paragraph>
+        <TextInput
+          label="CNPJ"
+          value={cnpj}
+          onChangeText={(text) => setCnpj(text)}
+          style={{
+            width: 300,
+            height: 50,
+          }}
+        />
+      </View>
+
+      <View style={{
+        marginTop:15,
+        backgroundColor:""
+      }}>
+        <Button mode="outlined" onPress={handleRegister}>
+          Cadastrar
+        </Button>
+      </View>
     </View>
   );
 }

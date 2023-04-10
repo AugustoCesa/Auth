@@ -81,10 +81,8 @@ export default function Register({ navigation }) { // fix: add {} to destructure
     <View
     style={{
       backgroundColor: "#5f1985",
-      minHeight: 1200,
-      maxHeight: 1800,
-      minWidth: 300,
-      maxWidth: 1000,
+      minHeight:"100%",
+      minWidth:"100%",
       alignItems: "center",
     }}
     >
