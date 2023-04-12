@@ -1,17 +1,24 @@
 import { View, Text } from "react-native";
+import  { estilo } from "../utils/styles";
+import { Image } from "react-native";
+
+
 
 const HomeScreen = () => {
+
 return(
-    <View style={{
-        backgroundColor:"#000000",
-        minHeight:"100%",
-        minWidth:"100%",
-        }} >
-        <Text style={{
-            color: "#ffffff",
-        }}>oi</Text>
+    <View style={estilo.container}>
+        <Image
+             style={estilo.imagem}
+             source={require('../../assets/caixa2.png')
+           }      
+        />
+        <Text style={estilo.titulo}>AuthBox</Text>
     </View>
+
+           
     )
 }
+
 
 export default HomeScreen;

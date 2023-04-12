@@ -8,6 +8,7 @@ import Register from "../screens/Register";
 import Config from "../screens/Config";
 import Empresa from "../screens/Empresa";
 import CadEmpresa from "../screens/CadEmpresa";
+import SearchScreen from "../screens/Search";
 
 const Stack = createNativeStackNavigator();
 export const RootNavigation = () => {
@@ -101,6 +102,21 @@ function MyDrawer() {
         component={Config}
         options={{
           title: "Configurações",
+          headerStyle: {
+            backgroundColor: "#5f1985",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "bold",
+          },
+        }}
+      />
+
+      <Drawer.Screen
+        name="Search"
+        component={SearchScreen}
+        options={{
+          title: "Search",
           headerStyle: {
             backgroundColor: "#5f1985",
           },
