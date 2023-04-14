@@ -151,7 +151,8 @@ export default function CadEmpresa({ navigation }) {
         marginTop:15,
         backgroundColor:""
       }}>
-        <Button mode="outlined" onPress={handleRegister}>
+        <Button
+        mode="contained" onPress={handleRegister}>
           Cadastrar
         </Button>
       </View>

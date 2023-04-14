@@ -60,7 +60,7 @@ export default function Register({ navigation }) { // fix: add {} to destructure
         nome: nome,
         email: email,
         senha: senha,
-        uid: uid, // add the user ID to the document
+        UsuarioId: auth.currentUser.uid, // add the user ID to the document
       });
       console.log("Id do usuário: ", docRef.id);
       setNome("");

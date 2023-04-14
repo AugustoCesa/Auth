@@ -1,13 +1,14 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { Perfil } from "../screens/Perfil";
+
 import HomeScreen from "../screens/Home";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
 import Config from "../screens/Config";
-import Empresa from "../screens/Empresa";
+import Empresas from "../screens/Empresas";
 import CadEmpresa from "../screens/CadEmpresa";
+import Perfil from "../screens/Perfil";
 
 const Stack = createNativeStackNavigator();
 export const RootNavigation = () => {
@@ -83,7 +84,7 @@ function MyDrawer() {
   
       <Drawer.Screen
         name="Empresa"
-        component={Empresa}
+        component={Empresas}
         options={{
           headershown: false,
           headerStyle: {
