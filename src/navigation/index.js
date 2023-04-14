@@ -1,7 +1,11 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+} from "@react-navigation/drawer";
+import { Text, View, Image } from "react-native";
 import HomeScreen from "../screens/Home";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
@@ -12,7 +16,6 @@ import Perfil from "../screens/Perfil";
 
 const Stack = createNativeStackNavigator();
 export const RootNavigation = () => {
-
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -33,7 +36,7 @@ export const RootNavigation = () => {
           }}
         />
 
-<Stack.Screen
+        <Stack.Screen
           name="CadEmpresa"
           component={CadEmpresa}
           options={{
@@ -48,11 +51,49 @@ export const RootNavigation = () => {
   );
 };
 
+
 const Drawer = createDrawerNavigator();
+
+const CustomDrawer = (props) => {
+  return (
+    <View style={{ flex: 1 }}>
+      <DrawerContentScrollView {...props}>
+        <View>
+          <Image
+            source={require("../../assets/perfil-vazio.png")}
+            style={{
+              width: 50,
+              height: 50,
+              marginLeft: "auto",
+              marginVertical: 10,
+              marginRight: "auto",
+              borderRadius: 50,
+            }}
+          />
+        </View>
+
+        <DrawerItemList {...props} />
+      </DrawerContentScrollView>
+    </View>
+  );
+};
 
 function MyDrawer() {
   return (
-    <Drawer.Navigator useLegacyImplementation initialRouteName="Home">
+
+    
+    <Drawer.Navigator
+      initialRouteName="Home"
+      drawerContent={(props) => <CustomDrawer {...props} />}
+      useLegacyImplementation
+      screenOptions={{
+        drawerStyle: {
+          backgroundColor: "#5F04B4",
+          width: 240,
+          
+        },
+      }}
+    >
       <Drawer.Screen
         name="Perfil"
         component={Perfil}
@@ -81,7 +122,7 @@ function MyDrawer() {
           },
         }}
       />
-  
+
       <Drawer.Screen
         name="Empresa"
         component={Empresas}
@@ -90,7 +131,7 @@ function MyDrawer() {
           headerStyle: {
             backgroundColor: "#5f1985",
           },
-          headerTintColor: "#fff",
+          headerTintColor: "#fffafa",
           headerTitleStyle: {
             fontWeight: "bold",
           },
