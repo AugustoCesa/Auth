@@ -44,9 +44,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "jetifier": "^2.0.0",
     "@testing-library/jest-native": "^5.4.2",
     "jest-expo": "^48.0.2",
+    "jetifier": "^2.0.0",
     "react-native-testing-library": "^6.0.0"
   },
   "private": true,
