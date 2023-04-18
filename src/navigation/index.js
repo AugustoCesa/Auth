@@ -5,6 +5,7 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { Text, View, Image } from "react-native";
 import HomeScreen from "../screens/Home";
 import Login from "../screens/Login";
@@ -13,12 +14,13 @@ import Config from "../screens/Config";
 import Empresas from "../screens/Empresas";
 import CadEmpresa from "../screens/CadEmpresa";
 import Perfil from "../screens/Perfil";
+import Gerenciamento from "../screens/Gerenciamento";
 
 const Stack = createNativeStackNavigator();
 export const RootNavigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator>
         <Stack.Screen
           name="Login"
           component={Login}
@@ -36,6 +38,18 @@ export const RootNavigation = () => {
           }}
         />
 
+<Stack.Screen
+          name="Gerenciamento"
+          component={Gerenciamento}
+          options={{
+            title: "Gerenciamento",
+          }}
+          headerStyle={{
+            backgroundColor: "#5f1985",
+          }}
+          
+        />
+
         <Stack.Screen
           name="CadEmpresa"
           component={CadEmpresa}
@@ -45,7 +59,8 @@ export const RootNavigation = () => {
           }}
         />
 
-        <Stack.Screen name={"Drawer"} component={MyDrawer} />
+        <Stack.Screen name={"Drawer"} component={MyDrawer}  options={{
+            headerShown: false, }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -154,4 +169,14 @@ function MyDrawer() {
       />
     </Drawer.Navigator>
   );
-}
+
+
+ 
+
+  
+
+} 
+
+
+
+ 

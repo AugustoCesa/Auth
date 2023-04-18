@@ -1,6 +1,6 @@
 import { collection, onSnapshot } from "firebase/firestore";
 import { auth, db } from "../config/firebase";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
 import { Button } from "react-native-paper";
 
@@ -45,7 +45,7 @@ export default function Empresas({ navigation }) {
         width: "100%",
         backgroundColor: "black",
         display: "flex",
-        alignItems:"center"
+        alignItems: "center",
       }}
     >
       {Empresas.map((empresa) => (
@@ -54,41 +54,47 @@ export default function Empresas({ navigation }) {
             backgroundColor: "#5f1985",
             borderRadius: 20,
             width: 320,
-            marginTop:20,
-            height:130,
-            alignItems:"center"
+            marginTop: 20,
+            height: 130,
+            alignItems: "center",
           }}
           key={empresa.id}
         >
-          <Text
-            style={{
-              color: "#fffafa",
-              fontSize: 20,
-              marginTop:10,
-            }}
-          >Nome Fantasia: {empresa.NomeFantasia}
-          </Text>
-          <Text
-            style={{
-              color: "#fffafa",
-              fontSize: 20,
-              marginTop:10,
-            }}
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("Gerenciamento", { id: empresa.id })
+            }
           >
-            CNPJ: {empresa.CNPJ}
-          </Text>
+            <Text
+              style={{
+                color: "#fffafa",
+                fontSize: 20,
+                marginTop: 10,
+              }}
+            >
+              Nome Fantasia: {empresa.NomeFantasia}
+            </Text>
+            <Text
+              style={{
+                color: "#fffafa",
+                fontSize: 20,
+                marginTop: 10,
+              }}
+            >
+              CNPJ: {empresa.CNPJ}
+            </Text>
 
-          <Text
-            style={{
-              color: "#fffafa",
-              fontSize: 20,
-              marginTop: 6,
-              marginLeft: 8,
-            }}
-          >
-            Logradouro: {empresa.Logradouro}
-          </Text>
-
+            <Text
+              style={{
+                color: "#fffafa",
+                fontSize: 20,
+                marginTop: 6,
+                marginLeft: 8,
+              }}
+            >
+              Logradouro: {empresa.Logradouro}
+            </Text>
+          </TouchableOpacity>
         </View>
       ))}
 
@@ -96,10 +102,10 @@ export default function Empresas({ navigation }) {
         mode="contained"
         onPress={() => navigation.navigate("CadEmpresa")}
         style={{
-            marginTop:20
+          marginTop: 20,
         }}
       >
-      adicionar + empresa
+        adicionar + empresa
       </Button>
     </View>
   );
