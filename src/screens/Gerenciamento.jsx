@@ -2,66 +2,65 @@ import { Text, View } from "react-native";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { Button } from "react-native-paper";
+import { TouchableOpacity } from "react-native";
 
 export default function Gerenciamento({ route, navigation }) {
   const [idEmpresa, setIdEmpresa] = useState("");
 
+  const [visible, setVisible] = useState(false);
+  const [produtos, setProdutos] = useState([]);
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
   useEffect(() => {
     console.log(route.params);
     setIdEmpresa(route.params.id);
   }, []);
 
-  const Tab = createMaterialTopTabNavigator();
   return (
-    <Tab.Navigator
-    tabBarOptions={{
-        activeTintColor: "#fffafa",
-        inactiveTintColor: "#B3B3B3",
-        style: { backgroundColor: "#5f1985" },
-        indicatorStyle: { backgroundColor: "#F5F5F5" },
-        labelStyle: {
-          fontSize: 16,
-          fontWeight: "bold",
-          textTransform: "capitalize",
-        },
+    <View
+      style={{
+        backgroundColor: "#000000",
+        minHeight: "100%",
+        minWidth: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
-      <Tab.Screen name="Estoque" component={Estoque} />
-      <Tab.Screen name="Funcionarios" component={Funcionarios} />
-    </Tab.Navigator>
-  );
-}
 
-function Estoque() {
-  return (
-    <View style={{ backgroundColor: "#000000", width: "100%", height: "100%", display:"flex", alignItems:"center" }}>
-      <Text
-        style={{
-          color: "#fffafa",
-          fontSize: 20,
-          textAlign: "center",
-          marginTop: 15,
-        }}
+<TouchableOpacity
+        style={{ marginBottom: 100 }}
+        onPress={() => navigation.navigate("CadProduto", { id: idEmpresa })}
       >
-        Estoque
-      </Text>
-      <Button style={{ 
-        marginTop: 15,
-        width: 200,
-      }} mode="contained">adicionar produtos</Button>
-    </View>
-  );
-}
+        <Text style={{ color: "#fffafa", fontSize: 30 }}>
+          Cadastrar produtos
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={{ marginBottom: 100 }}
+        onPress={() => navigation.navigate("Estoque", { id: produtos.id })}
+      >
+        <Text style={{ color: "#fffafa", fontSize: 30 }}>
+          Visualizar estoque
+        </Text>
+      </TouchableOpacity>
 
-function Funcionarios() {
-  return (
-    <View style={{ backgroundColor: "#000000", width: "100%", height: "100%" }}>
-      <Text style={{ color: "#fffafa", fontSize: 16, textAlign: "center" }}>
-        Funcionarios
-      </Text>
+      <TouchableOpacity
+        style={{ marginBottom: 100 }}
+        onPress={() => navigation.navigate("Venda", { id: produtos.id })}
+      >
+        <Text style={{ color: "#fffafa", fontSize: 30 }}>Efetuar venda</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={{ marginBottom: 100 }}
+        onPress={() => navigation.navigate("Funcionarios", { id: produtos.id })}
+      >
+        <Text style={{ color: "#fffafa", fontSize: 30 }}>
+          Visualizar funcionarios
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }

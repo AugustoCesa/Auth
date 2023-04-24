@@ -5,7 +5,7 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { Text, View, Image } from "react-native";
 import HomeScreen from "../screens/Home";
 import Login from "../screens/Login";
@@ -15,6 +15,8 @@ import Empresas from "../screens/Empresas";
 import CadEmpresa from "../screens/CadEmpresa";
 import Perfil from "../screens/Perfil";
 import Gerenciamento from "../screens/Gerenciamento";
+import Estoque from "../screens/Estoque";
+import CadProduto from "../screens/CadProduto";
 
 const Stack = createNativeStackNavigator();
 export const RootNavigation = () => {
@@ -38,16 +40,33 @@ export const RootNavigation = () => {
           }}
         />
 
-<Stack.Screen
+        <Stack.Screen
+          name="Estoque"
+          component={Estoque}
+          options={{
+            title: "Estoque",
+            headerStyle: {
+              backgroundColor: "#000000",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+
+        <Stack.Screen
           name="Gerenciamento"
           component={Gerenciamento}
           options={{
-            title: "Gerenciamento",
+            headerStyle: {
+              backgroundColor: "#000000",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
           }}
-          headerStyle={{
-            backgroundColor: "#5f1985",
-          }}
-          
         />
 
         <Stack.Screen
@@ -59,13 +78,26 @@ export const RootNavigation = () => {
           }}
         />
 
-        <Stack.Screen name={"Drawer"} component={MyDrawer}  options={{
-            headerShown: false, }}/>
+        <Stack.Screen
+          name="CadProduto"
+          component={CadProduto}
+          options={{
+            headerShown: false,
+            title: "CadProduto",
+          }}
+        />
+
+        <Stack.Screen
+          name={"Drawer"}
+          component={MyDrawer}
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
-
 
 const Drawer = createDrawerNavigator();
 
@@ -95,8 +127,6 @@ const CustomDrawer = (props) => {
 
 function MyDrawer() {
   return (
-
-    
     <Drawer.Navigator
       initialRouteName="Home"
       drawerContent={(props) => <CustomDrawer {...props} />}
@@ -105,7 +135,6 @@ function MyDrawer() {
         drawerStyle: {
           backgroundColor: "#5F04B4",
           width: 240,
-          
         },
       }}
     >
@@ -129,7 +158,7 @@ function MyDrawer() {
         options={{
           title: "Home",
           headerStyle: {
-            backgroundColor: "#5f1985",
+            backgroundColor: "#000000",
           },
           headerTintColor: "#fff",
           headerTitleStyle: {
@@ -169,14 +198,4 @@ function MyDrawer() {
       />
     </Drawer.Navigator>
   );
-
-
- 
-
-  
-
-} 
-
-
-
- 
+}

@@ -1,10 +1,11 @@
-import { View, Image } from "react-native";
+import { View, Image, Picker } from "react-native";
 import { Button, Paragraph, TextInput } from "react-native-paper";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   addDoc,
   collection,
-  doc,
+  docRef,
+  getDocs,
   getFirestore,
   setDoc,
 } from "firebase/firestore";
@@ -12,15 +13,16 @@ import {
 import { app, auth } from "../config/firebase";
 import { storeData } from "../utils/asyncUtils";
 
-export default function CadEmpresa({ navigation }) {
-  const [nomeFantasia, setNomeFantasia] = useState("");
-  const [RazaoSocial, setRazaoSocial] = useState("");
-  const [logradouro, setLogradouro] = useState("");
-  const [cnpj, setCnpj] = useState("");
+export default function CadProduto({ route,navigation }) {
+  const [nome, setNome] = useState("");
+  const [preco, setPreco] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [quantidade, setQuantidade] = useState("");
+  const [idEmpresa, setIdEmpresa] = useState(null);
 
   async function handleRegister() {
     // Checa se todos os campos estão preenchidos
-    if (!nomeFantasia || !RazaoSocial || !logradouro || !cnpj) {
+    if (!nome || !preco || !descricao || !quantidade || !idEmpresa) {
       console.log("Por favor, preencha todos os campos");
       return;
     }
@@ -30,21 +32,31 @@ export default function CadEmpresa({ navigation }) {
     // addDoc é responsável pela inserção do dado em uma coleção "Tabela"
     await addDoc(
       // Primeiro parâmetro é a coleção que é a origem dos dados
-      collection(db, "Empresas"),
+      collection(db, "Produtos"),
       // Segundo parâmetro é os dados que serão inseridos
       {
-        NomeFantasia: nomeFantasia,
-        RazaoSocial: RazaoSocial,
-        Logradouro: logradouro,
-        CNPJ: cnpj,
-        UsuarioId: auth.currentUser.uid, // Adiciona o id do usuário autor
+        nome,
+        preco,
+        descricao,
+        quantidade,
+        empresaId: idEmpresa,
+        usuarioId: auth.currentUser.uid, // Adiciona o id do usuário autor
       }
     ).then((docRef) => {
-      console.log("Id da empresa: ", docRef.id);
-      storeData("empresaId", { idEmpresA: docRef.id });
+      console.log("Id do produto: ", docRef.id);
+      storeData("produtoId", { idProduto: docRef.id });
       navigation.navigate("Home");
     });
   }
+
+  useEffect(() => {
+    async function fetchEmpresa() {
+        console.log(route.params);
+        setIdEmpresa(route.params.id);
+    }
+    fetchEmpresa();
+  }, []);
+
 
   return (
     <View
@@ -63,7 +75,7 @@ export default function CadEmpresa({ navigation }) {
         }}
         source={require("../../assets/caixa1.png")}
       />
-
+  
       <View>
         <Paragraph
           style={{
@@ -72,19 +84,19 @@ export default function CadEmpresa({ navigation }) {
           }}
         >
           {" "}
-          Nome Fantasia{" "}
+          Nome{" "}
         </Paragraph>
         <TextInput
-          label="Nome Fantasia"
-          value={nomeFantasia}
-          onChangeText={(text) => setNomeFantasia(text)}
+          label="Nome"
+          value={nome}
+          onChangeText={(text) => setNome(text)}
           style={{
             width: 300,
             height: 50,
           }}
         />
       </View>
-
+  
       <View>
         <Paragraph
           style={{
@@ -93,39 +105,19 @@ export default function CadEmpresa({ navigation }) {
           }}
         >
           {" "}
-          Razao Social{" "}
+          Preço{" "}
         </Paragraph>
         <TextInput
-          label="Razão Social"
-          value={RazaoSocial}
-          onChangeText={(text) => setRazaoSocial(text)}
+          label="Preço"
+          value={preco}
+          onChangeText={(text) => setPreco(text)}
           style={{
             width: 300,
             height: 50,
           }}
         />
       </View>
-
-      <View>
-        <Paragraph
-          style={{
-            color: "#fffafa",
-            fontSize: 16,
-          }}
-        >
-          Logradouro{" "}
-        </Paragraph>
-        <TextInput
-          label="Logradouro"
-          value={logradouro}
-          onChangeText={(text) => setLogradouro(text)}
-          style={{
-            width: 300,
-            height: 50,
-          }}
-        />
-      </View>
-
+  
       <View>
         <Paragraph
           style={{
@@ -134,28 +126,43 @@ export default function CadEmpresa({ navigation }) {
           }}
         >
           {" "}
-          CNPJ
+          Quantidade{" "}
         </Paragraph>
         <TextInput
-          label="CNPJ"
-          value={cnpj}
-          onChangeText={(text) => setCnpj(text)}
+          label="Quantidade"
+          value={quantidade}
+          onChangeText={(text) => setQuantidade(text)}
           style={{
             width: 300,
             height: 50,
           }}
         />
       </View>
-
-      <View style={{
-        marginTop:15,
-        backgroundColor:""
-      }}>
-        <Button
-        mode="contained" onPress={handleRegister}>
+  
+      <View>
+        <Paragraph
+          style={{
+            color: "#fffafa",
+            fontSize: 16,
+          }}
+        >
+          Descrição{" "}
+        </Paragraph>
+        <TextInput
+          label="Descrição"
+          value={descricao}
+          onChangeText={(text) => setDescricao(text)}
+          style={{
+            width: 300,
+            height: 50,
+          }}
+        />
+      </View>
+  
+      <View style={{ marginTop: 15 }}>
+        <Button mode="contained" onPress={handleRegister}>
           Cadastrar
         </Button>
       </View>
     </View>
-  );
-}
+  )};
