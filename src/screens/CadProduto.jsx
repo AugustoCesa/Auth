@@ -18,6 +18,7 @@ export default function CadProduto({ route,navigation }) {
   const [preco, setPreco] = useState("");
   const [descricao, setDescricao] = useState("");
   const [quantidade, setQuantidade] = useState("");
+  const [codigoDeBarras, setCodigoDeBarras] = useState("");
   const [idEmpresa, setIdEmpresa] = useState(null);
 
   async function handleRegister() {
@@ -37,6 +38,7 @@ export default function CadProduto({ route,navigation }) {
       {
         nome,
         preco,
+        codigoDeBarras,
         descricao,
         quantidade,
         empresaId: idEmpresa,
@@ -132,6 +134,27 @@ export default function CadProduto({ route,navigation }) {
           label="Quantidade"
           value={quantidade}
           onChangeText={(text) => setQuantidade(text)}
+          style={{
+            width: 300,
+            height: 50,
+          }}
+        />
+      </View>
+
+      <View>
+        <Paragraph
+          style={{
+            color: "#fffafa",
+            fontSize: 16,
+          }}
+        >
+          {" "}
+          Código de barras{" "}
+        </Paragraph>
+        <TextInput
+          label="Código de barras"
+          value={codigoDeBarras}
+          onChangeText={(text) => setCodigoDeBarras(text)}
           style={{
             width: 300,
             height: 50,

@@ -59,7 +59,6 @@ export default function Register({ navigation }) { // fix: add {} to destructure
       const docRef = await addDoc(collection(db, "usuarios"), {
         nome: nome,
         email: email,
-        senha: senha,
         UsuarioId: auth.currentUser.uid, // add the user ID to the document
       });
       console.log("Id do usuário: ", docRef.id);

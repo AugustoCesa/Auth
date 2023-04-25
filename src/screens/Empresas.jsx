@@ -89,7 +89,6 @@ export default function Empresas({ navigation }) {
                 color: "#fffafa",
                 fontSize: 20,
                 marginTop: 6,
-                marginLeft: 8,
               }}
             >
               Logradouro: {empresa.Logradouro}

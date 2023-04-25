@@ -28,8 +28,7 @@ export default function Gerenciamento({ route, navigation }) {
         justifyContent: "center",
       }}
     >
-
-<TouchableOpacity
+      <TouchableOpacity
         style={{ marginBottom: 100 }}
         onPress={() => navigation.navigate("CadProduto", { id: idEmpresa })}
       >
@@ -39,7 +38,12 @@ export default function Gerenciamento({ route, navigation }) {
       </TouchableOpacity>
       <TouchableOpacity
         style={{ marginBottom: 100 }}
-        onPress={() => navigation.navigate("Estoque", { id: produtos.id })}
+        onPress={() =>
+          navigation.navigate("Estoque", {
+            id: produtos.id,
+            empresaID: idEmpresa,
+          })
+        }
       >
         <Text style={{ color: "#fffafa", fontSize: 30 }}>
           Visualizar estoque
