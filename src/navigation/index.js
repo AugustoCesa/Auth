@@ -82,8 +82,15 @@ export const RootNavigation = () => {
           name="CadProduto"
           component={CadProduto}
           options={{
-            headerShown: false,
             title: "CadProduto",
+
+            headerStyle: {
+              backgroundColor: "#000000",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
           }}
         />
 
