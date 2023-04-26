@@ -100,6 +100,7 @@ export default function Produtos({ route, navigation }) {
             height: 130,
             alignItems: "center",
             width: "90%",
+            display: "flex",
           }}
           key={produto.id}
         >

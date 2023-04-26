@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 
-const HomeScreen = () => {
+export default function HomeScreen  ()  {
 return(
     <View style={{
         backgroundColor:"#000000",
@@ -14,4 +14,3 @@ return(
     )
 }
 
-export default HomeScreen;

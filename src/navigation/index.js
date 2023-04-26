@@ -16,7 +16,7 @@ import CadEmpresa from "../screens/CadEmpresa";
 import Perfil from "../screens/Perfil";
 import Gerenciamento from "../screens/Gerenciamento";
 import Estoque from "../screens/Estoque";
-import CadProduto from "../screens/CadProduto";
+import CadProduto, { CadProdutos } from "../screens/CadProduto";
 
 const Stack = createNativeStackNavigator();
 export const RootNavigation = () => {
@@ -82,10 +82,10 @@ export const RootNavigation = () => {
           name="CadProduto"
           component={CadProduto}
           options={{
-            title: "CadProduto",
+            title: "Cadastro de Produto",
 
             headerStyle: {
-              backgroundColor: "#000000",
+              backgroundColor: "#5f1985",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {

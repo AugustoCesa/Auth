@@ -82,7 +82,7 @@ export default function CadProduto({ route,navigation }) {
         <Paragraph
           style={{
             color: "#fffafa",
-            fontSize: 16,
+            fontSize: 20,
           }}
         >
           {" "}
@@ -103,7 +103,7 @@ export default function CadProduto({ route,navigation }) {
         <Paragraph
           style={{
             color: "#fffafa",
-            fontSize: 16,
+            fontSize: 20,
           }}
         >
           {" "}
@@ -124,7 +124,7 @@ export default function CadProduto({ route,navigation }) {
         <Paragraph
           style={{
             color: "#fffafa",
-            fontSize: 16,
+            fontSize: 20,
           }}
         >
           {" "}
@@ -145,7 +145,7 @@ export default function CadProduto({ route,navigation }) {
         <Paragraph
           style={{
             color: "#fffafa",
-            fontSize: 16,
+            fontSize: 20,
           }}
         >
           {" "}
@@ -166,7 +166,7 @@ export default function CadProduto({ route,navigation }) {
         <Paragraph
           style={{
             color: "#fffafa",
-            fontSize: 16,
+            fontSize: 20,
           }}
         >
           Descrição{" "}
