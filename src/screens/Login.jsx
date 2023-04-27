@@ -5,6 +5,7 @@ import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { useEffect } from "react";
 
+
 /**
  * Componente de Login do usuário
  *
@@ -95,6 +96,11 @@ export default function Login({ navigation }) {
           marginBottom: 40,
           height: 100,
           width: 100,
+          shadowColor: "#000",
+          shadowOffset: { width: 4, height: 7 },
+          shadowOpacity: 0.3,
+          shadowRadius: 3.84,
+          elevation: 30,
         }}
         source={require("../../assets/caixa1.png")}
       />
@@ -103,6 +109,7 @@ export default function Login({ navigation }) {
         style={{
           color: "#fffafa",
           fontSize: 20,
+          fontWeight: "bold"
         }}
       >
         Faça o seu Login
@@ -114,6 +121,7 @@ export default function Login({ navigation }) {
           style={{
             color: "#fffafa",
             fontSize: 16,
+            fontWeight: "bold"
           }}
         >
           E-mail
@@ -128,12 +136,17 @@ export default function Login({ navigation }) {
             style={{
               width: 300,
               height: 50,
+              shadowColor: "#000",
+              shadowOffset: { width: 4, height: 7 },
+              shadowOpacity: 0.3,
+              shadowRadius: 3.84,
+              elevation: 100,
             }}
           />
         </View>
       </View>
       <View>
-        <Paragraph style={{ color: "#fffafa", fontSize: 16 }}>Senha</Paragraph>
+        <Paragraph style={{ color: "#fffafa", fontSize: 16,  fontWeight: "bold" }}>Senha</Paragraph>
         <TextInput
           testID="Senha"
           mode="outlined"
@@ -153,12 +166,27 @@ export default function Login({ navigation }) {
             width: 300,
             height: 50,
             marginBottom: 10,
+            shadowColor: "#000",
+            shadowOffset: { width: 4, height: 7 },
+            shadowOpacity: 0.3,
+            shadowRadius: 3.84,
+            elevation: 30,
           }}
         />
       </View>
       <View>
         <View style={{ marginTop: 20, color: "white" }}>
-          <Button mode="contained" onPress={handleRegister}>
+          <Button
+            mode="contained"
+            onPress={handleRegister}
+            style={{
+              shadowColor: "#000",
+              shadowOffset: { width: 4, height: 7 },
+              shadowOpacity: 0.35,
+              shadowRadius: 3.84,
+              elevation: 30,
+            }}
+          >
             Login
           </Button>
           <View
@@ -174,11 +202,12 @@ export default function Login({ navigation }) {
             <TouchableOpacity
               style={{
                 flexDirection: "row",
+           
               }}
               onPress={() => navigation.navigate("Register")}
             >
-              <Text style={{ color: "#fffafa", marginTop: 5, fontSize: 16 }}>
-                Cadastra-se
+              <Text style={{ color: "#ffff", marginTop: 5, fontSize: 16, fontWeight: "bold", textDecorationLine: "underline" }}>
+                Cadastre-se 
               </Text>
             </TouchableOpacity>
           </View>

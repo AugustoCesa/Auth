@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { View, Image } from "react-native";
-import { Button, HelperText, Paragraph, TextInput } from "react-native-paper";
+import { View, Image, TouchableOpacity } from "react-native";
+import { Button, HelperText, Paragraph, Text, TextInput } from "react-native-paper";
 import { auth, db } from "../config/firebase";
 import { addDoc, collection } from "firebase/firestore";
 
@@ -201,6 +201,19 @@ export default function Register({ navigation }) { // fix: add {} to destructure
           Registrar
         </Button>
       </View>
+      <Text style={{ color: "#fffafa", fontSize: 16 }}>
+              Já possui uma conta?
+            </Text>
+            <TouchableOpacity
+              style={{
+                flexDirection: "row",
+              }}
+              onPress={() => navigation.navigate("Login")}
+            >
+              <Text style={{ color: "#fffafa", marginTop: 5, fontSize: 16 }}>
+                Faça o seu Login
+              </Text>
+            </TouchableOpacity>
     </View>
   );
 }
