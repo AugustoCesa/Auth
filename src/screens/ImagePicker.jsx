@@ -1,6 +1,6 @@
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useState } from "react";
-import { storage } from "../config/firebase/firebase";
+import { storage } from "../config/firebase";
 import { Button, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Image } from "react-native";
@@ -42,11 +42,11 @@ export default function ImagePicker({ onImgURLChange }) {
   };
 
   return (
-    <View>
+    <View style={{alignItems:"center"}}>
          <TouchableOpacity onPress={handleButtonPress}>
         <Image
-          source={require("../Images/botaoModal.png")}
-          style={{ width: "80px", height: "100px", marginTop: "30px" }}
+          source={require("../Imagem/caixa.png")}
+          style={{ width: 90, height: 100, marginTop: 30 }}
         />
       </TouchableOpacity>
     </View>

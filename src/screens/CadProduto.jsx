@@ -1,6 +1,7 @@
-import { View, Image, Picker } from "react-native";
+import { View, Image, ImageBackground, TouchableOpacity  } from "react-native";
 import { Button, Paragraph, TextInput } from "react-native-paper";
 import { useState, useEffect } from "react";
+import * as React from "react";
 import {
   addDoc,
   collection,
@@ -12,6 +13,7 @@ import {
 // importa a aplicação em Firebase
 import { app, auth } from "../config/firebase";
 import { storeData } from "../utils/asyncUtils";
+import ImagePicker from "./ImagePicker";
 
 export default function CadProduto({ route,navigation }) {
   const [nome, setNome] = useState("");
@@ -19,7 +21,8 @@ export default function CadProduto({ route,navigation }) {
   const [descricao, setDescricao] = useState("");
   const [quantidade, setQuantidade] = useState("");
   const [codigoDeBarras, setCodigoDeBarras] = useState("");
-  const [idEmpresa, setIdEmpresa] = useState(null);
+  const [imagem, setImagem] = useState("");
+  const [idEmpresa, setIdEmpresa] = React.useState(null);
 
   async function handleRegister() {
     // Checa se todos os campos estão preenchidos
@@ -41,6 +44,7 @@ export default function CadProduto({ route,navigation }) {
         codigoDeBarras,
         descricao,
         quantidade,
+        imagem: imagem,
         empresaId: idEmpresa,
         usuarioId: auth.currentUser.uid, // Adiciona o id do usuário autor
       }
@@ -59,6 +63,9 @@ export default function CadProduto({ route,navigation }) {
     fetchEmpresa();
   }, []);
 
+const handleImgURLChange = (url) => {
+    setImagem(url);
+  };
 
   return (
     <View
@@ -68,15 +75,31 @@ export default function CadProduto({ route,navigation }) {
         alignItems: "center",
       }}
     >
-      <Image
-        style={{
-          marginTop: 100,
-          marginBottom: 40,
-          height: 100,
-          width: 100,
-        }}
-        source={require("../../assets/caixa1.png")}
-      />
+  
+ <View style={{ alignItems: "center" }}>
+            <View style={{marginTop:30}}>
+              {imagem ? (
+                <TouchableOpacity onPress={setImagem}>
+                  <ImageBackground
+                    style={{ width: 130, height: 180 }}
+                    source={{ uri: imagem }}
+                  >
+                    <ImagePicker onImgURLChange={handleImgURLChange}></ImagePicker>
+                  </ImageBackground>
+                </TouchableOpacity>
+              ) : (
+                <ImageBackground
+                  source={require("../Imagem/camera.jpg")}
+                  style={{ width: 90, height: 100 }}
+                >
+                  <ImagePicker onImgURLChange={handleImgURLChange}></ImagePicker>
+                </ImageBackground>
+              )}
+            </View>
+          </View>
+
+
+
   
       <View>
         <Paragraph
