@@ -3,6 +3,7 @@ import { auth, db } from "../config/firebase";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
 import { Button } from "react-native-paper";
+import { ScrollView } from "react-native";
 
 export default function Empresas({ navigation }) {
   const [visible, setVisible] = useState(false);
@@ -39,12 +40,10 @@ export default function Empresas({ navigation }) {
   }, []);
 
   return (
-    <View
+   <ScrollView><View
       style={{
-        height: "100%",
-        width: "100%",
+        minHeight: 1000,
         backgroundColor: "black",
-        display: "flex",
         alignItems: "center",
       }}
     >
@@ -106,6 +105,6 @@ export default function Empresas({ navigation }) {
       >
         adicionar + empresa
       </Button>
-    </View>
+    </View></ScrollView>
   );
 }

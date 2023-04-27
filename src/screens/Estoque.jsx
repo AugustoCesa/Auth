@@ -6,7 +6,7 @@ import {
   where,
 } from "firebase/firestore";
 import { auth, db } from "../config/firebase";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
 import { useState, useEffect } from "react";
 import { Button } from "react-native-paper";
 import { log } from "react-native-reanimated";
@@ -16,6 +16,7 @@ export default function Produtos({ route, navigation }) {
   const [Produtos, setProdutos] = useState([]);
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
+  const [Imagem, setImagem] = useState(null);
   const [empresaID, setEmpresaID] = useState("");
 
   const user = auth.currentUser;
@@ -81,61 +82,66 @@ export default function Produtos({ route, navigation }) {
   }
 
   return (
-    <View
-      style={{
-        height: "100%",
-        width: "100%",
-        backgroundColor: "black",
-        display: "flex",
-        alignItems: "center",
-      }}
-    >
-      {Produtos.map((produto) => (
-        <View
-          style={{
-            backgroundColor: "#5f1985",
-            borderRadius: 20,
-            width: 320,
-            marginTop: 20,
-            height: 130,
-            alignItems: "center",
-            width: "90%",
-            display: "flex",
-          }}
-          key={produto.id}
-        >
-          <Text
+    <ScrollView>
+      <View
+        style={{
+          backgroundColor: "black",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        {Produtos.map((produto) => (
+          <View
             style={{
-              color: "#fffafa",
-              fontSize: 20,
-              marginTop: 10,
+              backgroundColor: "#5f1985",
+              borderRadius: 20,
+              width: 200,
+              marginTop: 20,
+              height: 240,
+              alignItems: "center",
+              width: "90%",
+              display: "flex",
             }}
+            key={produto.id}
           >
-            Nome: {produto.nome}
-          </Text>
-          <Text
-            style={{
-              color: "#fffafa",
-              fontSize: 20,
-              marginTop: 6,
-              marginLeft: 8,
-            }}
-          >
-            Quantidade: {produto.quantidade}
-          </Text>
+            <Image
+              source={{ uri: produto.imagem }}
+              style={{ width: 100, height: 100 }}
+            />
 
-          <Text
-            style={{
-              color: "#fffafa",
-              fontSize: 20,
-              marginTop: 6,
-              marginLeft: 8,
-            }}
-          >
-            Descrição: {produto.descricao}
-          </Text>
-        </View>
-      ))}
-    </View>
+            <Text
+              style={{
+                color: "#fffafa",
+                fontSize: 20,
+                marginTop: 10,
+              }}
+            >
+              Nome: {produto.nome}
+            </Text>
+            <Text
+              style={{
+                color: "#fffafa",
+                fontSize: 20,
+                marginTop: 6,
+                marginLeft: 8,
+              }}
+            >
+              Quantidade: {produto.quantidade}
+            </Text>
+
+            <Text
+              style={{
+                color: "#fffafa",
+                fontSize: 20,
+                marginTop: 6,
+                marginLeft: 8,
+              }}
+            >
+              Descrição: {produto.descricao}
+            </Text>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
   );
 }

@@ -1,19 +1,19 @@
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useState } from "react";
 import { storage } from "../config/firebase";
-import { Button, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { Image } from "react-native";
+import { View, TouchableOpacity, Image } from "react-native";
+import * as ImagePicker from 'expo-image-picker';
 
-export default function ImagePicker({ onImgURLChange }) {
+export default function ImagePickerFirebase ({ onImgURLChange }) {
   const [progressPorcent, setPorgessPorcent] = useState(0);
 
-  const handleFileChange = (event) => {
-    const file = event.target?.files?.[0];
-    if (!file) return;
-
-    const storageRef = ref(storage, `livros/${file.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, file);
+  const handleFileChange = async (uri) => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+    const fileExtension = blob.type.split('/')[1];
+    const fileName = `${Math.random().toString(36).substring(2)}.${fileExtension}`;
+    const storageRef = ref(storage, `Imagens/${fileName}`);
+    const uploadTask = uploadBytesResumable(storageRef, blob);
 
     uploadTask.on(
       "state_changed",
@@ -34,19 +34,31 @@ export default function ImagePicker({ onImgURLChange }) {
     );
   };
 
-  const handleButtonPress = () => {
-    const fileInput = document.createElement('input');
-    fileInput.type = 'file';
-    fileInput.onchange = handleFileChange;
-    fileInput.click();
+  const handleButtonPress = async () => {
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (permissionResult.granted === false) {
+      alert("Permission to access the camera roll is required!");
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      handleFileChange(result.uri);
+    }
   };
 
   return (
-    <View style={{alignItems:"center"}}>
-         <TouchableOpacity onPress={handleButtonPress}>
+    <View>
+      <TouchableOpacity onPress={handleButtonPress}>
         <Image
-          source={require("../Imagem/caixa.png")}
-          style={{ width: 90, height: 100, marginTop: 30 }}
+          source={require("../Imagem/arquivo.png")}
+          style={{ width: 72, height: 71, }}
         />
       </TouchableOpacity>
     </View>

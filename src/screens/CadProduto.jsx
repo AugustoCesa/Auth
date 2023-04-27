@@ -1,4 +1,4 @@
-import { View, Image, ImageBackground, TouchableOpacity  } from "react-native";
+import { View, Image, ImageBackground, TouchableOpacity, Text  } from "react-native";
 import { Button, Paragraph, TextInput } from "react-native-paper";
 import { useState, useEffect } from "react";
 import * as React from "react";
@@ -77,11 +77,13 @@ const handleImgURLChange = (url) => {
     >
   
  <View style={{ alignItems: "center" }}>
-            <View style={{marginTop:30}}>
+  
+  <Text style={{ color: "#fffafa", fontSize: 20, marginTop:20,  }}>Imagem do produto:</Text>
+            <View style={{marginTop:30}}>            
               {imagem ? (
                 <TouchableOpacity onPress={setImagem}>
                   <ImageBackground
-                    style={{ width: 130, height: 180 }}
+                    style={{ width: 150, height: 150 }}
                     source={{ uri: imagem }}
                   >
                     <ImagePicker onImgURLChange={handleImgURLChange}></ImagePicker>
@@ -89,8 +91,8 @@ const handleImgURLChange = (url) => {
                 </TouchableOpacity>
               ) : (
                 <ImageBackground
-                  source={require("../Imagem/camera.jpg")}
-                  style={{ width: 90, height: 100 }}
+                  source={require("../Imagem/arquivo.png")}
+                  style={{ width: 72, height: 71 }}
                 >
                   <ImagePicker onImgURLChange={handleImgURLChange}></ImagePicker>
                 </ImageBackground>
