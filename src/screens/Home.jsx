@@ -70,9 +70,8 @@ export default function HomeScreen() {
           }}
         >
           E uma vez dentro da empresa você vai estar na tela de gerenciamento, e
-          irá escolher entre cadastrar seus produtos, ver funcionários que vem o
-          estoque da empresa e efetuar uma venda diretamente de lá e descontar
-          do banco de dados automaticamente! Sem ter que editar
+          irá escolher entre cadastrar seus produtos, ver funcionários que vêem o
+          estoque da empresa e o poder de editar os seus produtos assim que quiser!
         </Text>
       </View>
     </ScrollView>

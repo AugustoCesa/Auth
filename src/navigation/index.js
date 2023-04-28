@@ -15,9 +15,10 @@ import Empresas from "../screens/Empresas";
 import CadEmpresa from "../screens/CadEmpresa";
 import Perfil from "../screens/Perfil";
 import Gerenciamento from "../screens/Gerenciamento";
-import Estoque from "../screens/Estoque";
 import CadProduto, { CadProdutos } from "../screens/CadProduto";
 import EditProduto from "../screens/EditProduto";
+import Estoque from "../screens/Estoque";
+
 
 const Stack = createNativeStackNavigator();
 export const RootNavigation = () => {

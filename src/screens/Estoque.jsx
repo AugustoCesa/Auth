@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   collection,
   getDocs,
@@ -6,14 +7,20 @@ import {
   where,
 } from "firebase/firestore";
 import { auth, db } from "../config/firebase";
-import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
-import { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  Image,
+  TextInput,
+} from "react-native";
 import { Button } from "react-native-paper";
-import { log } from "react-native-reanimated";
 
-export default function Produtos({ route, navigation }) {
+export default function Estoque({ route, navigation }) {
   const [visible, setVisible] = useState(false);
   const [Produtos, setProdutos] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
   const [Imagem, setImagem] = useState(null);
@@ -32,29 +39,8 @@ export default function Produtos({ route, navigation }) {
   }, [route.params?.empresaID]);
 
   useEffect(() => {
-    // const unsubscribe = onSnapshot(
-    //   collection(db, "Produtos"),
-    //   (querySnapshot) => {
-    //     const Produtos = [];
-    //     querySnapshot.forEach((doc) => {
-    //       const data = doc.data();
-
-    //       if ((user.uid === data.usuarioId)(data.empresaId)) {
-    //         Produtos.push({
-    //           ...data,
-    //           id: doc.id,
-    //         });
-    //       } else {
-    //         console.log("Nao é igual mas achei:", { ...data, id: doc.id });
-    //       }
-    //     });
-    //     setProdutos(Produtos);
-    //     console.log("Achei estes produtos:", Produtos);
-    //   }
-    // );
     console.log("empresaID mudou: ", empresaID);
     queryAllEmpresasRelatedToUID();
-    // return () => unsubscribe();
   }, [empresaID]);
 
   async function queryAllEmpresasRelatedToUID() {
@@ -81,6 +67,10 @@ export default function Produtos({ route, navigation }) {
       });
   }
 
+  const filteredProducts = Produtos.filter((produto) => {
+    return produto.nome.toLowerCase().includes(searchValue.toLowerCase());
+  });
+
   return (
     <ScrollView>
       <View
@@ -91,7 +81,24 @@ export default function Produtos({ route, navigation }) {
           minHeight: 800,
         }}
       >
-        {Produtos.map((produto) => (
+        <View style={{ marginTop: 20 }}>
+          <TextInput
+            style={{
+              height: 40,
+              width: 300,
+              borderColor: "gray",
+              borderWidth: 1,
+              paddingLeft: 10,
+              borderRadius: 5,
+              backgroundColor: "#fffafa",
+            }}
+            onChangeText={(text) => setSearchValue(text)}
+            value={searchValue}
+            placeholder="Buscar produto"
+          />
+        </View>
+
+        {filteredProducts.map((produto) => (
           <View
             style={{
               backgroundColor: "#5f1985",
@@ -114,7 +121,7 @@ export default function Produtos({ route, navigation }) {
                 marginLeft: 35,
               }}
             />
-            <View style={{marginLeft:10}}>
+            <View style={{ marginLeft: 10 }}>
               <Text
                 style={{
                   color: "#fffafa",
@@ -143,7 +150,21 @@ export default function Produtos({ route, navigation }) {
               >
                 Preço: {produto.preco}
               </Text>
-              
+              <View style={{ marginLeft: 8 }}>
+                <TouchableOpacity>
+                  <Button
+                    style={{ backgroundColor: "#5f1985" }}
+                    onPress={() =>
+                      navigation.navigate("EditProduto", {
+                        produtoId: produto.id,
+                      })
+                    }
+                    mode="contained"
+                  >
+                    Editar
+                  </Button>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         ))}
