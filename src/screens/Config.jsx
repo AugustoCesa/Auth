@@ -1,7 +1,7 @@
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
-import {  View, Text, Button } from "react-native";
-
+import {  View, Text, } from "react-native";
+import { Button } from "react-native-paper";
 
 const Config = (navigation) => {
     const LogoutButton = () => {
@@ -17,7 +17,7 @@ const Config = (navigation) => {
           }
         };
       
-        return <Button style={{width:80, backgroundColor:"#5f1985", height:30}} title="Logout" onPress={handleLogout}>Logout</Button>;
+        return <Button style={{width:80, backgroundColor:"#5f1985", height:45, color:"#fffafa"}} title="Logout" onPress={handleLogout}>Logout</Button>;
       };
 
   return (

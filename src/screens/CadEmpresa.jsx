@@ -1,4 +1,4 @@
-import { View, Image } from "react-native";
+import { View, Image, Text, ImageBackground, TouchableOpacity } from "react-native";
 import { Button, Paragraph, TextInput } from "react-native-paper";
 import { useState } from "react";
 import {
@@ -11,12 +11,15 @@ import {
 // importa a aplicação em Firebase
 import { app, auth } from "../config/firebase";
 import { storeData } from "../utils/asyncUtils";
+import ImagePicker from "./ImagePicker";
+
 
 export default function CadEmpresa({ navigation }) {
   const [nomeFantasia, setNomeFantasia] = useState("");
   const [RazaoSocial, setRazaoSocial] = useState("");
   const [logradouro, setLogradouro] = useState("");
   const [cnpj, setCnpj] = useState("");
+  const [imagem, setImagem] = useState("");
 
   async function handleRegister() {
     // Checa se todos os campos estão preenchidos
@@ -37,6 +40,7 @@ export default function CadEmpresa({ navigation }) {
         RazaoSocial: RazaoSocial,
         Logradouro: logradouro,
         CNPJ: cnpj,
+        imagem: imagem,
         UsuarioId: auth.currentUser.uid, // Adiciona o id do usuário autor
       }
     ).then((docRef) => {
@@ -44,7 +48,10 @@ export default function CadEmpresa({ navigation }) {
       storeData("empresaId", { idEmpresA: docRef.id });
       navigation.navigate("Home");
     });
-  }
+  }const handleImgURLChange = (url) => {
+    setImagem(url);
+  };
+
 
   return (
     <View
@@ -54,21 +61,36 @@ export default function CadEmpresa({ navigation }) {
         alignItems: "center",
       }}
     >
-      <Image
-        style={{
-          marginTop: 100,
-          marginBottom: 40,
-          height: 100,
-          width: 100,
-        }}
-        source={require("../../assets/caixa1.png")}
-      />
+<View style={{ alignItems: "center" }}>
+  
+  <Text style={{ color: "#fffafa", fontSize: 20, marginTop:20,  }}>Imagem da empresa:</Text>
+            <View style={{marginTop:30}}>            
+              {imagem ? (
+                <TouchableOpacity onPress={setImagem}>
+                  <ImageBackground
+                    style={{ width: 150, height: 150, borderRadius: 30, }}
+                    source={{ uri: imagem }}
+                  >
+                    <ImagePicker onImgURLChange={handleImgURLChange}></ImagePicker>
+                  </ImageBackground>
+                </TouchableOpacity>
+              ) : (
+                <ImageBackground
+                  source={require("../Imagem/camera.png")}
+                  style={{ width: 92, height: 91,  }}
+                >
+                  <ImagePicker onImgURLChange={handleImgURLChange}></ImagePicker>
+                </ImageBackground>
+              )}
+            </View>
+          </View>
 
       <View>
         <Paragraph
           style={{
             color: "#fffafa",
             fontSize: 16,
+            marginTop: 20,
           }}
         >
           {" "}
@@ -90,6 +112,7 @@ export default function CadEmpresa({ navigation }) {
           style={{
             color: "#fffafa",
             fontSize: 16,
+            marginTop: 10,
           }}
         >
           {" "}
@@ -111,6 +134,7 @@ export default function CadEmpresa({ navigation }) {
           style={{
             color: "#fffafa",
             fontSize: 16,
+            marginTop: 10,
           }}
         >
           Logradouro{" "}
@@ -131,6 +155,7 @@ export default function CadEmpresa({ navigation }) {
           style={{
             color: "#fffafa",
             fontSize: 16,
+            marginTop: 10,
           }}
         >
           {" "}
@@ -147,12 +172,13 @@ export default function CadEmpresa({ navigation }) {
         />
       </View>
 
-      <View style={{
-        marginTop:15,
-        backgroundColor:""
-      }}>
-        <Button
-        mode="contained" onPress={handleRegister}>
+      <View
+        style={{
+          marginTop: 15,
+          backgroundColor: "",
+        }}
+      >
+        <Button mode="contained" onPress={handleRegister}>
           Cadastrar
         </Button>
       </View>

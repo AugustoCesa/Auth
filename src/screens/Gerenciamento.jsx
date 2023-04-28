@@ -29,15 +29,15 @@ export default function Gerenciamento({ route, navigation }) {
       }}
     >
       <TouchableOpacity
-        style={{ marginBottom: 100 }}
+        style={{ marginBottom: 80 }}
         onPress={() => navigation.navigate("CadProduto", { id: idEmpresa })}
       >
-        <Text style={{ color: "#fffafa", fontSize: 30 }}>
+        <Text style={{ color: "#fffafa", fontSize: 20 }}>
           Cadastrar produtos
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={{ marginBottom: 100 }}
+        style={{ marginBottom: 80 }}
         onPress={() =>
           navigation.navigate("Estoque", {
             id: produtos.id,
@@ -45,24 +45,24 @@ export default function Gerenciamento({ route, navigation }) {
           })
         }
       >
-        <Text style={{ color: "#fffafa", fontSize: 30 }}>
+        <Text style={{ color: "#fffafa", fontSize: 20 }}>
           Visualizar estoque
         </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={{ marginBottom: 100 }}
+        style={{ marginBottom: 80 }}
         onPress={() => navigation.navigate("Venda", { id: produtos.id })}
       >
-        <Text style={{ color: "#fffafa", fontSize: 30 }}>Efetuar venda</Text>
+        <Text style={{ color: "#fffafa", fontSize: 20 }}>Efetuar venda</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={{ marginBottom: 100 }}
+        style={{ marginBottom: 80 }}
         onPress={() => navigation.navigate("Funcionarios", { id: produtos.id })}
       >
-        <Text style={{ color: "#fffafa", fontSize: 30 }}>
-          Visualizar funcionarios
+        <Text style={{ color: "#fffafa", fontSize: 20 }}>
+          Visualizar Pedidos
         </Text>
       </TouchableOpacity>
     </View>

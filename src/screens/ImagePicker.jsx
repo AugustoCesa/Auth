@@ -57,8 +57,8 @@ export default function ImagePickerFirebase ({ onImgURLChange }) {
     <View>
       <TouchableOpacity onPress={handleButtonPress}>
         <Image
-          source={require("../Imagem/arquivo.png")}
-          style={{ width: 72, height: 71, }}
+          source={require("../Imagem/camera.png")}
+          style={{ width: 92, height: 91, borderRadius: 10}}
         />
       </TouchableOpacity>
     </View>

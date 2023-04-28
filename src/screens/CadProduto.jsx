@@ -91,8 +91,8 @@ const handleImgURLChange = (url) => {
                 </TouchableOpacity>
               ) : (
                 <ImageBackground
-                  source={require("../Imagem/arquivo.png")}
-                  style={{ width: 72, height: 71 }}
+                  source={require("../Imagem/camera.png")}
+                  style={{ width: 92, height: 91 }}
                 >
                   <ImagePicker onImgURLChange={handleImgURLChange}></ImagePicker>
                 </ImageBackground>

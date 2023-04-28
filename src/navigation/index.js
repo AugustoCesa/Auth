@@ -17,6 +17,7 @@ import Perfil from "../screens/Perfil";
 import Gerenciamento from "../screens/Gerenciamento";
 import Estoque from "../screens/Estoque";
 import CadProduto, { CadProdutos } from "../screens/CadProduto";
+import EditProduto from "../screens/EditProduto";
 
 const Stack = createNativeStackNavigator();
 export const RootNavigation = () => {
@@ -73,8 +74,14 @@ export const RootNavigation = () => {
           name="CadEmpresa"
           component={CadEmpresa}
           options={{
-            headerShown: false,
             title: "CadEmpresa",
+            headerStyle: {
+              backgroundColor: "#5f1985",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
           }}
         />
 
@@ -83,6 +90,22 @@ export const RootNavigation = () => {
           component={CadProduto}
           options={{
             title: "Cadastro de Produto",
+
+            headerStyle: {
+              backgroundColor: "#5f1985",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+
+<Stack.Screen
+          name="EditProduto"
+          component={EditProduto}
+          options={{
+            title: "Editar Produto",
 
             headerStyle: {
               backgroundColor: "#5f1985",
@@ -175,7 +198,7 @@ function MyDrawer() {
       />
 
       <Drawer.Screen
-        name="Empresa"
+        name="Empresas"
         component={Empresas}
         options={{
           headershown: false,
