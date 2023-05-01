@@ -8,8 +8,7 @@ import { ScrollView } from "react-native";
 export default function Empresas({ navigation }) {
   const [visible, setVisible] = useState(false);
   const [Empresas, setEmpresas] = useState([]);
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
+  
 
   async function handleDeleteEmpresa(id) {
     try {

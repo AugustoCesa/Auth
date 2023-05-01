@@ -5,6 +5,7 @@ import {
   onSnapshot,
   query,
   where,
+  deleteDoc,
 } from "firebase/firestore";
 import { auth, db } from "../config/firebase";
 import {
@@ -14,6 +15,8 @@ import {
   ScrollView,
   Image,
   TextInput,
+  Modal,
+  Alert,
 } from "react-native";
 import { Button } from "react-native-paper";
 
@@ -25,6 +28,7 @@ export default function Estoque({ route, navigation }) {
   const hideModal = () => setVisible(false);
   const [Imagem, setImagem] = useState(null);
   const [empresaID, setEmpresaID] = useState("");
+  const [selectedProduto, setSelectedProduto] = useState();
 
   const user = auth.currentUser;
   if (!user) {
@@ -104,10 +108,12 @@ export default function Estoque({ route, navigation }) {
               backgroundColor: "#5f1985",
               borderRadius: 15,
               marginTop: 60,
-              alignItems: "flex-start",
-              minWidth: 190,
+              minWidth: 320,
               display: "flex",
               minHeight: 260,
+              flexDirection: "row",
+              flexWrap: "wrap",
+              justifyContent: "center",
             }}
             key={produto.id}
           >
@@ -116,12 +122,23 @@ export default function Estoque({ route, navigation }) {
               style={{
                 width: 120,
                 height: 120,
-                marginTop: 15,
+                marginTop: 60,
                 borderRadius: 10,
-                marginLeft: 35,
+                marginLeft: 6,
               }}
             />
-            <View style={{ marginLeft: 10 }}>
+            <View
+              style={{
+                marginLeft: 5,
+                marginTop: 20,
+                backgroundColor: "black",
+                width: 180,
+                borderRadius: 10,
+                alignItems: "center",
+                height: 220,
+                marginBottom: 20,
+              }}
+            >
               <Text
                 style={{
                   color: "#fffafa",
@@ -146,11 +163,12 @@ export default function Estoque({ route, navigation }) {
                   color: "#fffafa",
                   fontSize: 16,
                   marginTop: 6,
+                  marginBottom: 6,
                 }}
               >
                 Preço: {produto.preco}
               </Text>
-              <View style={{ marginLeft: 8 }}>
+              <View style={{ marginTop: 5, backgroundColor: "black" }}>
                 <TouchableOpacity>
                   <Button
                     style={{ backgroundColor: "#5f1985" }}

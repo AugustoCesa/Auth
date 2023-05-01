@@ -88,8 +88,10 @@ export default function Register({ navigation }) { // fix: add {} to destructure
 
 <Image
         style={{
-          marginTop: 100,
+          marginTop: 40,
           marginBottom: 40,
+          height: 100,
+          width: 100,
         }}
         source={require("../../assets/caixa1.png")}
       />
@@ -197,7 +199,7 @@ export default function Register({ navigation }) { // fix: add {} to destructure
         </HelperText>
       </View>
       <View>
-        <Button mode="contained" onPress={handleRegister}>
+        <Button style={{marginBottom:30, backgroundColor:"black"}} mode="contained" onPress={handleRegister}>
           Registrar
         </Button>
       </View>

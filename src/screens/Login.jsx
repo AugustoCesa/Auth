@@ -158,7 +158,7 @@ export default function Login({ navigation }) {
       </View>
       <View>
         <View style={{ marginTop: 20, color: "white" }}>
-          <Button mode="contained" onPress={handleRegister}>
+          <Button style={{marginBottom:30, backgroundColor:"black"}}  mode="contained" onPress={handleRegister}>
             Login
           </Button>
           <View
