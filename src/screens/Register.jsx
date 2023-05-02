@@ -79,10 +79,11 @@ export default function Register({ navigation }) { // fix: add {} to destructure
   return (
     <View
     style={{
-      backgroundColor: "#5f1985",
+      backgroundColor: "#000",
       minHeight:"100%",
       minWidth:"100%",
       alignItems: "center",
+      flex:1,
     }}
     >
 
@@ -90,9 +91,31 @@ export default function Register({ navigation }) { // fix: add {} to destructure
         style={{
           marginTop: 100,
           marginBottom: 40,
+          marginTop: 100,         
+          height: 130,
+          width: 130,
+          shadowColor: "#000",
+          shadowOffset: { width: 4, height: 7 },
+          shadowOpacity: 0.3,
+          shadowRadius: 3.84,
+          elevation: 30,
         }}
-        source={require("../../assets/caixa1.png")}
+        source={require("../../assets/caixa21.png")}
       />
+<Paragraph
+        style={{
+          color: "#fffafa",
+          fontSize: 20,
+        }}
+      >AuthBox</Paragraph>
+
+      <View style={{
+         flex: 1,
+         backgroundColor: "#5f1985",
+         width: 450,
+         borderTopLeftRadius: 49,
+         borderTopRightRadius: 49,
+      }}>
 
       <Paragraph
         style={{
@@ -101,7 +124,10 @@ export default function Register({ navigation }) { // fix: add {} to destructure
         }}
       >Faça o seu Registro</Paragraph>
       <HelperText type="error"> {error} </HelperText>
-      <View>
+
+      <View style={{
+        alignSelf: 'center'
+      }}>
         <Paragraph
          style={{
           color: "#fffafa",
@@ -119,7 +145,9 @@ export default function Register({ navigation }) { // fix: add {} to destructure
         />
       </View>
 
-      <View>
+      <View style={{
+        alignSelf: 'center'
+      }}>
         <Paragraph
          style={{
           color: "#fffafa",
@@ -137,7 +165,10 @@ export default function Register({ navigation }) { // fix: add {} to destructure
         />
       </View>
 
-      <View style={{ marginTop: 10 }}>
+      <View style={{
+         marginTop: 10,
+         alignSelf: 'center',
+         }}>
         <Paragraph
          style={{
           color: "#fffafa",
@@ -165,7 +196,9 @@ export default function Register({ navigation }) { // fix: add {} to destructure
           }
         />
       </View>
-      <View style={{ marginTop: 10 }}>
+      <View style={{ marginTop: 10,
+      alignSelf: 'center',
+    }}>
         <Paragraph
          style={{
           color: "#fffafa",
@@ -201,7 +234,8 @@ export default function Register({ navigation }) { // fix: add {} to destructure
           Registrar
         </Button>
       </View>
-      <Text style={{ color: "#fffafa", fontSize: 16 }}>
+      <Text style={{ color: "#fffafa",
+       fontSize: 16 }}>
               Já possui uma conta?
             </Text>
             <TouchableOpacity
@@ -214,6 +248,7 @@ export default function Register({ navigation }) { // fix: add {} to destructure
                 Faça o seu Login
               </Text>
             </TouchableOpacity>
+      </View>
     </View>
   );
 }

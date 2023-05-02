@@ -5,7 +5,6 @@ import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { useEffect } from "react";
 
-
 /**
  * Componente de Login do usuário
  *
@@ -84,7 +83,7 @@ export default function Login({ navigation }) {
   return (
     <View
       style={{
-        backgroundColor: "#5f1985",
+        backgroundColor: "#000",
         minHeight: "100%",
         minWidth: "100%",
         alignItems: "center",
@@ -92,124 +91,168 @@ export default function Login({ navigation }) {
     >
       <Image
         style={{
-          marginTop: 100,
-          marginBottom: 40,
-          height: 100,
-          width: 100,
+          marginTop: 100,         
+          height: 130,
+          width: 130,
           shadowColor: "#000",
           shadowOffset: { width: 4, height: 7 },
           shadowOpacity: 0.3,
           shadowRadius: 3.84,
           elevation: 30,
         }}
-        source={require("../../assets/caixa1.png")}
+        source={require("../../assets/caixa21.png")}
       />
 
-      <Paragraph
+    <Text
+          style={{
+            color: "#fffafa",
+            fontSize: 30,
+            fontWeight: "bold",
+            textAlign: 'center',
+            marginBottom: 30
+          }}
+          >AuthBox
+          </Text>
+      <View
         style={{
-          color: "#fffafa",
-          fontSize: 20,
-          fontWeight: "bold"
+          flex: 2,
+          backgroundColor: "#5f1985",
+          width: 450,
+          borderTopLeftRadius: 49,
+          borderTopRightRadius: 49,
         }}
       >
-        Faça o seu Login
-      </Paragraph>
-
-      <HelperText type="error"> {error} </HelperText>
-      <View>
         <Paragraph
           style={{
             color: "#fffafa",
-            fontSize: 16,
-            fontWeight: "bold"
+            fontSize: 30,
+            fontWeigh: "bold",
+            textAlign: 'center',
+            marginTop: 30
+          }}
+        > Bem Vindo(a)
+        </Paragraph>
+
+        <HelperText type="error"> {error} </HelperText>
+        <View
+          style={{
+            alignSelf: "center",
+            borderTopLeftRadius: 25,
+            borderTopRightRadius: 25,
           }}
         >
-          E-mail
-        </Paragraph>
-        <View>
+          <Paragraph
+            style={{
+              color: "#fffafa",
+              fontSize: 16,
+              fontWeight: "bold",
+            }}
+          >
+            E-mail
+          </Paragraph>
+          <View>
+            <TextInput
+              testID="Email"
+              mode="outlined"
+              placeholder="Digite seu e-mail"
+              value={email}
+              onChangeText={setEmail}
+              style={{
+                width: 300,
+                height: 50,
+                shadowColor: "#000",
+                shadowOffset: { width: 4, height: 7 },
+                shadowOpacity: 0.3,
+                shadowRadius: 3.84,
+                elevation: 100,
+              }}
+            />
+          </View>
+        </View>
+        <View
+          style={{
+            alignSelf: "center",
+          }}
+        >
+          <Paragraph
+            style={{ color: "#fffafa", fontSize: 16, fontWeight: "bold" }}
+          >
+            Senha
+          </Paragraph>
           <TextInput
-            testID="Email"
+            testID="Senha"
             mode="outlined"
-            placeholder="Digite seu e-mail"
-            value={email}
-            onChangeText={setEmail}
+            placeholder="Digite sua Senha"
+            value={senha}
+            onChangeText={setSenha}
+            secureTextEntry={passwordVisible}
+            right={
+              <TextInput.Icon
+                icon={passwordVisible ? "eye" : "eye-off"}
+                size={20}
+                style={{ marginRight: 10 }}
+                onPress={() => setPasswordVisible(!passwordVisible)}
+              />
+            }
             style={{
               width: 300,
               height: 50,
+              marginBottom: 10,
               shadowColor: "#000",
               shadowOffset: { width: 4, height: 7 },
               shadowOpacity: 0.3,
               shadowRadius: 3.84,
-              elevation: 100,
+              elevation: 30,
             }}
           />
         </View>
-      </View>
-      <View>
-        <Paragraph style={{ color: "#fffafa", fontSize: 16,  fontWeight: "bold" }}>Senha</Paragraph>
-        <TextInput
-          testID="Senha"
-          mode="outlined"
-          placeholder="Digite sua Senha"
-          value={senha}
-          onChangeText={setSenha}
-          secureTextEntry={passwordVisible}
-          right={
-            <TextInput.Icon
-              icon={passwordVisible ? "eye" : "eye-off"}
-              size={20}
-              style={{ marginRight: 10 }}
-              onPress={() => setPasswordVisible(!passwordVisible)}
-            />
-          }
-          style={{
-            width: 300,
-            height: 50,
-            marginBottom: 10,
-            shadowColor: "#000",
-            shadowOffset: { width: 4, height: 7 },
-            shadowOpacity: 0.3,
-            shadowRadius: 3.84,
-            elevation: 30,
-          }}
-        />
-      </View>
-      <View>
-        <View style={{ marginTop: 20, color: "white" }}>
-          <Button
-            mode="contained"
-            onPress={handleRegister}
-            style={{
-              shadowColor: "#000",
-              shadowOffset: { width: 4, height: 7 },
-              shadowOpacity: 0.35,
-              shadowRadius: 3.84,
-              elevation: 30,
-            }}
-          >
-            Login
-          </Button>
-          <View
-            style={{
-              flexDirection: "column",
-              alignItems: "center",
-              marginTop: 10,
-            }}
-          >
-            <Text style={{ color: "#fffafa", fontSize: 16 }}>
-              Não possui uma conta?{" "}
-            </Text>
-            <TouchableOpacity
+        <View>
+          <View style={{ marginTop: 20, color: "white", alignSelf: "center" }}>
+            <Button
+              mode="contained"
+              onPress={handleRegister}
               style={{
-                flexDirection: "row",
-           
+                shadowColor: "#000",
+                shadowOffset: { width: 4, height: 7 },
+                shadowOpacity: 0.35,
+                shadowRadius: 3.84,
+                elevation: 30,
               }}
-              onPress={() => navigation.navigate("Register")}
             >
-              <Text style={{ color: "#ffff", marginTop: 5, fontSize: 16, fontWeight: "bold", textDecorationLine: "underline" }}>
-                Cadastre-se 
+              Login
+            </Button>
+            <View
+              style={{
+                flexDirection: "column",
+                alignItems: "center",
+                marginTop: 10,
+              }}
+            >
+              <Text style={{ color: "#fffafa", fontSize: 16 }}>
+                Não possui uma conta?{" "}
               </Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  flexDirection: "row",
+                }}
+                onPress={() => navigation.navigate("Register")}
+              >
+                <Text
+                  style={{
+                    color: "#fff",
+                    marginTop: 5,
+                    fontSize: 16,                   
+                    borderWidth: 2, 
+                    borderColor: 'Black',
+                   borderRadius: 10,
+                   padding: 6,
+
+                  }}
+                >
+                  Cadastre-se
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>
