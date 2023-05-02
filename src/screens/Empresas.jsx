@@ -1,6 +1,13 @@
 import { collection, onSnapshot, deleteDoc, doc } from "firebase/firestore";
 import { auth, db } from "../config/firebase";
-import { View, Text, TouchableOpacity, Image, Alert } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  Alert,
+  TextInput,
+} from "react-native";
 import { useState, useEffect } from "react";
 import { Button } from "react-native-paper";
 import { ScrollView } from "react-native";
@@ -8,7 +15,6 @@ import { ScrollView } from "react-native";
 export default function Empresas({ navigation }) {
   const [visible, setVisible] = useState(false);
   const [Empresas, setEmpresas] = useState([]);
-  
 
   async function handleDeleteEmpresa(id) {
     try {
@@ -79,36 +85,50 @@ export default function Empresas({ navigation }) {
               borderRadius: 20,
               width: 320,
               marginTop: 20,
-              height: 334,
+              height: 350,
               alignItems: "center",
             }}
             key={empresa.id}
           >
             <View style={{ marginLeft: 10, alignItems: "center" }}>
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate("Gerenciamento", { id: empresa.id })
-                }
+              <Image
+                source={{ uri: empresa.imagem }}
+                style={{
+                  width: 160,
+                  height: 150,
+                  marginTop: 10,
+                  borderRadius: 10,
+                  marginBottom: 5,
+                  alignItems: "center",
+                }}
+              />
+              <View
+                style={{
+                  backgroundColor: "#000000",
+                  width: 290,
+                  borderRadius: 10,
+                  alignItems: "center",
+                  marginRight: 10,
+                  height: 185,
+                }}
               >
-                <Image
-                  source={{ uri: empresa.imagem }}
+                <TextInput
                   style={{
-                    width: 160,
-                    height: 150,
+                    backgroundColor: "white",
+                    color: "black",
                     marginTop: 10,
+                    width: 200,
+                    height: 30,
                     borderRadius: 10,
-                    marginLeft: 58,
-                    marginBottom: 5,
+                    textAlign: "center",
                   }}
+                  value={String(empresa.id)}
+                  editable={true}
                 />
-                <View
-                  style={{
-                    backgroundColor: "#000000",
-                    width: 290,
-                    borderRadius: 10,
-                    alignItems: "center",
-                    marginRight:10,
-                  }}
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("Gerenciamento", { id: empresa.id })
+                  }
                 >
                   <Text
                     style={{
@@ -141,12 +161,12 @@ export default function Empresas({ navigation }) {
                   <Button
                     onPress={() => confirmDeleteEmpresa(empresa.id)}
                     mode="contained"
-                    style={{marginTop: 10, marginBottom:10}}
+                    style={{ marginTop: 10, marginBottom: 10 }}
                   >
                     Apagar
                   </Button>
-                </View>
-              </TouchableOpacity>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         ))}

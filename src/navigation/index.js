@@ -18,7 +18,8 @@ import Gerenciamento from "../screens/Gerenciamento";
 import CadProduto, { CadProdutos } from "../screens/CadProduto";
 import EditProduto from "../screens/EditProduto";
 import Estoque from "../screens/Estoque";
-
+import EditEmpresa from "../screens/MeuTrabalho";
+import MeuTrabalho from "../screens/MeuTrabalho";
 
 const Stack = createNativeStackNavigator();
 export const RootNavigation = () => {
@@ -87,6 +88,21 @@ export const RootNavigation = () => {
         />
 
         <Stack.Screen
+          name="EditEmpresa"
+          component={MeuTrabalho}
+          options={{
+            title: "Meu trabalho",
+
+            headerStyle: {
+              backgroundColor: "#5f1985",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+        <Stack.Screen
           name="CadProduto"
           component={CadProduto}
           options={{
@@ -102,7 +118,7 @@ export const RootNavigation = () => {
           }}
         />
 
-<Stack.Screen
+        <Stack.Screen
           name="EditProduto"
           component={EditProduto}
           options={{
