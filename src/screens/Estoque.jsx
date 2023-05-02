@@ -82,8 +82,6 @@ export default function Estoque({ route, navigation }) {
     }
   }
 
-  
-
   const filteredProducts = Produtos.filter((produto) => {
     return produto.nome.toLowerCase().includes(searchValue.toLowerCase());
   });
@@ -130,6 +128,7 @@ export default function Estoque({ route, navigation }) {
             }}
             key={produto.id}
           >
+            <View style={{display:"flex", flexDirection:"column", }}>
             <Image
               source={{ uri: produto.imagem }}
               style={{
@@ -140,6 +139,14 @@ export default function Estoque({ route, navigation }) {
                 marginLeft: 6,
               }}
             />
+
+            <TouchableOpacity style={{backgroundColor:"black", borderRadius:10, marginTop:10}}
+              onPress={() =>
+                navigation.navigate("Venda", { id: produto.id })
+              }
+            >
+            <Button>Vender</Button>
+            </TouchableOpacity></View>
             <View
               style={{
                 marginLeft: 5,
@@ -196,33 +203,33 @@ export default function Estoque({ route, navigation }) {
                   </Button>
                 </TouchableOpacity>
                 <TouchableOpacity>
-  <Button
-    style={{ backgroundColor: "#5f1985", marginTop: 10 }}
-    onPress={() =>
-      Alert.alert(
-        "Excluir Produto",
-        "Tem certeza que deseja excluir este produto?",
-        [
-          {
-            text: "Cancelar",
-            onPress: () => console.log("Cancelado"),
-            style: "cancel",
-          },
-          {
-            text: "Excluir",
-            onPress: () =>
-              handleDeleteProduto(produto.id).then(() =>
-                Alert.alert("Produto deletado com sucesso!")
-              ),
-          },
-        ]
-      )
-    }
-    mode="contained"
-  >
-    Excluir
-  </Button>
-</TouchableOpacity>
+                  <Button
+                    style={{ backgroundColor: "#5f1985", marginTop: 10 }}
+                    onPress={() =>
+                      Alert.alert(
+                        "Excluir Produto",
+                        "Tem certeza que deseja excluir este produto?",
+                        [
+                          {
+                            text: "Cancelar",
+                            onPress: () => console.log("Cancelado"),
+                            style: "cancel",
+                          },
+                          {
+                            text: "Excluir",
+                            onPress: () =>
+                              handleDeleteProduto(produto.id).then(() =>
+                                Alert.alert("Produto deletado com sucesso!")
+                              ),
+                          },
+                        ]
+                      )
+                    }
+                    mode="contained"
+                  >
+                    Excluir
+                  </Button>
+                </TouchableOpacity>
               </View>
             </View>
           </View>
