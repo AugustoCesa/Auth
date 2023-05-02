@@ -6,6 +6,7 @@ import {
   query,
   where,
   deleteDoc,
+  doc,
 } from "firebase/firestore";
 import { auth, db } from "../config/firebase";
 import {
@@ -70,6 +71,18 @@ export default function Estoque({ route, navigation }) {
         console.log("Error getting documents: ", error);
       });
   }
+
+  async function handleDeleteProduto(produtoId) {
+    try {
+      console.log(produtoId);
+      await deleteDoc(doc(db, "Produtos", produtoId));
+      console.log("Produto deletado com sucesso!");
+    } catch (error) {
+      console.error("Erro ao deletar produto: ", error);
+    }
+  }
+
+  
 
   const filteredProducts = Produtos.filter((produto) => {
     return produto.nome.toLowerCase().includes(searchValue.toLowerCase());
@@ -182,6 +195,34 @@ export default function Estoque({ route, navigation }) {
                     Editar
                   </Button>
                 </TouchableOpacity>
+                <TouchableOpacity>
+  <Button
+    style={{ backgroundColor: "#5f1985", marginTop: 10 }}
+    onPress={() =>
+      Alert.alert(
+        "Excluir Produto",
+        "Tem certeza que deseja excluir este produto?",
+        [
+          {
+            text: "Cancelar",
+            onPress: () => console.log("Cancelado"),
+            style: "cancel",
+          },
+          {
+            text: "Excluir",
+            onPress: () =>
+              handleDeleteProduto(produto.id).then(() =>
+                Alert.alert("Produto deletado com sucesso!")
+              ),
+          },
+        ]
+      )
+    }
+    mode="contained"
+  >
+    Excluir
+  </Button>
+</TouchableOpacity>
               </View>
             </View>
           </View>
