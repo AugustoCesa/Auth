@@ -93,7 +93,7 @@ export default function Register({ navigation }) { // fix: add {} to destructure
           height: 100,
           width: 100,
         }}
-        source={require("../../assets/caixa1.png")}
+        source={require("../../assets/caixa.png")}
       />
 
       <Paragraph

@@ -56,7 +56,8 @@ export default function HomeScreen() {
         }}
       >
        
-
+        <View style={{ alignItems:"center", width:180, borderRadius:20,}}>
+        <Text style={{fontSize:25, color:"#fffafa", marginBottom: 30, width:120, textAlign:"center", borderRadius:15}}>AuthBox</Text></View>
         <TextInput
           placeholder="Buscar produto..."
           value={busca}
@@ -70,20 +71,7 @@ export default function HomeScreen() {
           }}
         />
 
-        <View style={{ alignItems:"center", backgroundColor:"#5f1985", width:200, borderRadius:20}}>
- <Image
-          style={{
-            marginTop: 20,
-            marginBottom: 10,
-            height: 150,
-            width: 150,
-            backgroundColor: "#5f1985",
-            borderRadius: 20,
-            alignItems: "center",
-          }}
-          source={require("../../assets/caixa.png")}
-        />
-        <Text style={{fontSize:25, color:"#fffafa", marginBottom: 20, backgroundColor:"black", width:120, textAlign:"center", borderRadius:15}}>AuthBox</Text></View>
+
         <View
           style={{
             flexDirection: "row",
