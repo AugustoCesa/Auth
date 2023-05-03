@@ -186,7 +186,7 @@ export default function Estoque({ route, navigation }) {
                   marginBottom: 6,
                 }}
               >
-                Preço: {produto.preco}
+                Preço: R${produto.preco}
               </Text>
               <View style={{ marginTop: 5, backgroundColor: "black" }}>
                 <TouchableOpacity>

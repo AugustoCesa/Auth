@@ -85,8 +85,9 @@ export default function Empresas({ navigation }) {
               borderRadius: 20,
               width: 320,
               marginTop: 20,
-              height: 350,
+              height: 360,
               alignItems: "center",
+              marginBottom: 10,
             }}
             key={empresa.id}
           >
@@ -109,7 +110,7 @@ export default function Empresas({ navigation }) {
                   borderRadius: 10,
                   alignItems: "center",
                   marginRight: 10,
-                  height: 185,
+                  height: 190,
                 }}
               >
                 <TextInput

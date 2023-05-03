@@ -17,7 +17,10 @@ export default function HomeScreen() {
   console.log(user.uid);
 
   useEffect(() => {
-    const q = query(collection(db, "Produtos"), where("usuarioId", "==", user.uid));
+    const q = query(
+      collection(db, "Produtos"),
+      where("usuarioId", "==", user.uid)
+    );
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const produtos = [];
       querySnapshot.forEach((doc) => {
@@ -49,15 +52,38 @@ export default function HomeScreen() {
         style={{
           backgroundColor: "#000000",
           display: "flex",
+          alignItems: "center",
         }}
       >
+       
+
         <TextInput
           placeholder="Buscar produto..."
           value={busca}
           onChangeText={(text) => setBusca(text)}
-          style={{ backgroundColor: "#ffffff", margin: 30, borderRadius: 10, padding: 10 }}
+          style={{
+            backgroundColor: "#ffffff",
+            margin: 30,
+            borderRadius: 10,
+            padding: 10,
+            width: 300,
+          }}
         />
 
+        <View style={{ alignItems:"center", backgroundColor:"#5f1985", width:200, borderRadius:20}}>
+ <Image
+          style={{
+            marginTop: 20,
+            marginBottom: 10,
+            height: 150,
+            width: 150,
+            backgroundColor: "#5f1985",
+            borderRadius: 20,
+            alignItems: "center",
+          }}
+          source={require("../../assets/caixa.png")}
+        />
+        <Text style={{fontSize:25, color:"#fffafa", marginBottom: 20, backgroundColor:"black", width:120, textAlign:"center", borderRadius:15}}>AuthBox</Text></View>
         <View
           style={{
             flexDirection: "row",
@@ -66,7 +92,14 @@ export default function HomeScreen() {
           }}
         >
           {produtosFiltrados.length > 0 ? null : (
-            <View style={{ backgroundColor: "#5f1985", width: 290, marginTop: 20, borderRadius: 20 }}>
+            <View
+              style={{
+                backgroundColor: "#5f1985",
+                width: 290,
+                marginTop: 20,
+                borderRadius: 20,
+              }}
+            >
               <Text
                 style={{
                   color: "#fffafa",
@@ -79,7 +112,8 @@ export default function HomeScreen() {
                   textAlign: "center",
                 }}
               >
-                Quando você começar a cadastrar produtos eles irão aparecer aqui!
+                Quando você começar a cadastrar produtos eles irão aparecer
+                aqui!
               </Text>
             </View>
           )}
@@ -110,14 +144,27 @@ export default function HomeScreen() {
                   alignContent: "center",
                   marginRight: 35,
                 }}
-             
-
               />
-              <View style={{backgroundColor:"black", width:160, marginTop:7, alignItems:"center", borderRadius:20}}>
-              <Text style={{color:"white", fontSize:17, marginTop:12}}>{produto.nome}</Text>
-              <Text style={{color:"white", fontSize:17}}>R${produto.preco}</Text>
-              <Text style={{color:"white", fontSize:17, marginBottom:7}}>Quant.{produto.quantidade}</Text>
-            </View></View>
+              <View
+                style={{
+                  backgroundColor: "black",
+                  width: 160,
+                  marginTop: 7,
+                  alignItems: "center",
+                  borderRadius: 20,
+                }}
+              >
+                <Text style={{ color: "white", fontSize: 17, marginTop: 12 }}>
+                  {produto.nome}
+                </Text>
+                <Text style={{ color: "white", fontSize: 17 }}>
+                  R${produto.preco}
+                </Text>
+                <Text style={{ color: "white", fontSize: 17, marginBottom: 7 }}>
+                  Quant.{produto.quantidade}
+                </Text>
+              </View>
+            </View>
           ))}
         </View>
 
