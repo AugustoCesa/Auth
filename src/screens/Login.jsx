@@ -89,6 +89,7 @@ export default function Login({ navigation }) {
         alignItems: "center",
       }}
     >
+      
       <Image
         style={{
           marginTop: 100,         
@@ -115,20 +116,21 @@ export default function Login({ navigation }) {
           </Text>
       <View
         style={{
-          flex: 2,
+          flex: 1,
           backgroundColor: "#5f1985",
           width: 450,
           borderTopLeftRadius: 49,
           borderTopRightRadius: 49,
+          height: 450,
         }}
       >
         <Paragraph
           style={{
             color: "#fffafa",
             fontSize: 30,
-            fontWeigh: "bold",
+            fontWeight: 'bold',
             textAlign: 'center',
-            marginTop: 30
+            marginTop: 30,
           }}
         > Bem Vindo(a)
         </Paragraph>
@@ -212,6 +214,7 @@ export default function Login({ navigation }) {
               mode="contained"
               onPress={handleRegister}
               style={{
+                backgroundColor: '#000',
                 shadowColor: "#000",
                 shadowOffset: { width: 4, height: 7 },
                 shadowOpacity: 0.35,
@@ -231,9 +234,11 @@ export default function Login({ navigation }) {
               <Text style={{ color: "#fffafa", fontSize: 16 }}>
                 Não possui uma conta?{" "}
               </Text>
+
+              <View style={{flexDirection: 'row', justifyContent: 'space-between',}}>
               <TouchableOpacity
                 style={{
-                  flexDirection: "row",
+
                 }}
                 onPress={() => navigation.navigate("Register")}
               >
@@ -244,14 +249,17 @@ export default function Login({ navigation }) {
                     fontSize: 16,                   
                     borderWidth: 2, 
                     borderColor: 'Black',
-                   borderRadius: 10,
-                   padding: 6,
+                    borderRadius: 10,
+                     padding: 6,
+                     fontWeight: "bold",
+                    
 
                   }}
                 >
                   Cadastre-se
                 </Text>
               </TouchableOpacity>
+              </View>
             </View>
           </View>
         </View>
