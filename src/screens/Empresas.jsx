@@ -110,7 +110,7 @@ export default function Empresas({ navigation }) {
                   borderRadius: 10,
                   alignItems: "center",
                   marginRight: 10,
-                  height: 190,
+                  height: 200,
                 }}
               >
                 <TextInput
