@@ -146,7 +146,7 @@ export default function MeuTrabalho({ route, navigation }) {
                   <Button
                     style={{ backgroundColor: "#5f1985" }}
                     onPress={() =>
-                      navigation.navigate("EditProduto", {
+                      navigation.navigate("EditProdutoFuncionario", {
                         produtoId: produto.id,
                       })
                     }

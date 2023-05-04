@@ -20,6 +20,7 @@ import EditProduto from "../screens/EditProduto";
 import Estoque from "../screens/Estoque";
 import EditEmpresa from "../screens/MeuTrabalho";
 import MeuTrabalho from "../screens/MeuTrabalho";
+import EditProdutoFuncionario from "../screens/EditProdutoFuncionario";
 
 const Stack = createNativeStackNavigator();
 export const RootNavigation = () => {
@@ -133,6 +134,23 @@ export const RootNavigation = () => {
             },
           }}
         />
+
+<Stack.Screen
+          name="EditProdutoFuncionario"
+          component={EditProdutoFuncionario}
+          options={{
+            title: "Editar quantidade",
+
+            headerStyle: {
+              backgroundColor: "#5f1985",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+
 
         <Stack.Screen
           name={"Drawer"}

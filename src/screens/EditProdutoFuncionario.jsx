@@ -9,18 +9,14 @@ import {
 import { collection, doc, updateDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 
-export default function EditProduto({ route, navigation }) {
-  const [nome, setNome] = useState("");
+export default function EditProdutoFuncionario({ route, navigation }) {
   const [quantidade, setQuantidade] = useState("");
-  const [preco, setPreco] = useState("");
   const [produtoId, setProdutoId] = useState("");
 
   useEffect(() => {
     if (route.params?.produtoId) {
       setProdutoId(route.params.produtoId);
-      setNome(route.params.nome);
       setQuantidade(route.params.quantidade);
-      setPreco(route.params.preco);
     }
   }, [route.params?.produtoId]);
 
@@ -28,9 +24,7 @@ export default function EditProduto({ route, navigation }) {
     try {
       const produtoRef = doc(collection(db, "Produtos"), produtoId);
       await updateDoc(produtoRef, {
-        nome,
         quantidade,
-        preco,
       });
       navigation.goBack();
     } catch (error) {
@@ -43,24 +37,14 @@ export default function EditProduto({ route, navigation }) {
 
 <Text style={{color:"#fffafa", fontSize:20,}}>Editando produto</Text>
 
-      <TextInput
-        placeholder="Novo Nome"
-        value={nome}
-        onChangeText={(value) => setNome(value)}
-        style={styles.input}
-      />
+     
       <TextInput
         placeholder="Nova Quantidade"
         value={quantidade}
         onChangeText={(value) => setQuantidade(value)}
         style={styles.input}
       />
-      <TextInput
-        placeholder="Novo Preço"
-        value={preco}
-        onChangeText={(value) => setPreco(value)}
-        style={styles.input}
-      />
+  
       <TouchableOpacity onPress={handleUpdateProduto} style={styles.button}>
         <Text style={styles.buttonText}>Salvar</Text>
       </TouchableOpacity>
