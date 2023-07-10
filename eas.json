@@ -3,18 +3,18 @@
     "version": ">= 3.8.1"
   },
   "build": {
-    "development": {
-      "developmentClient": true,
-      "distribution": "internal",
-      "ios": {
-        "resourceClass": "m-medium"
+    "preview": {
+      "android": {
+        "buildType": "apk"
       }
     },
-    "preview": {
-      "distribution": "internal",
-      "ios": {
-        "resourceClass": "m-medium"
+    "preview2": {
+      "android": {
+        "gradleCommand": ":app:assembleRelease"
       }
+    },
+    "preview3": {
+      "developmentClient": true
     },
     "production": {
       "ios": {

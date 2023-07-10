@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "AuthBox",
-    "slug": "AuthBox",
+    "slug": "authbox",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -29,8 +29,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "c30e814e-3350-44fc-8734-75de47ea4624"
+        "projectId": "5e386cbc-0e6f-4257-982b-d03d5d05e10b"
       }
-    }
+    },
+    "owner": "greatvalen"
   }
 }
