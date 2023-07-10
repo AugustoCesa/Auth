@@ -32,6 +32,12 @@
         "projectId": "5e386cbc-0e6f-4257-982b-d03d5d05e10b"
       }
     },
-    "owner": "greatvalen"
+    "owner": "greatvalen",
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/5e386cbc-0e6f-4257-982b-d03d5d05e10b"
+    }
   }
 }
